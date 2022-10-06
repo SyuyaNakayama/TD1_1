@@ -43,6 +43,7 @@ class GameScene {
 	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
 	ViewProjection viewProjection_;
+	ViewProjection mapCamera_;
 	CollisionManager collisionManager_;
 	Player player_;
 	WallManager wallManager_;

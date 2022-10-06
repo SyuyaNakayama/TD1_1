@@ -16,13 +16,15 @@ private:
 	const float ROT_SPD = 0.03f;
 	int life_;
 	ViewProjection* viewProjection_;
+	ViewProjection* mapCamera_;
 
 	void Move();
 	void Rotate();
 public:
-	void Initialize(ViewProjection* viewProjection);
+	void Initialize(ViewProjection* viewProjection,ViewProjection* mapCamera);
 	void Update();
 	void Draw();
+	void Draw(ViewProjection viewProjection);
 
 	void OnCollision() { life_--; }
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }

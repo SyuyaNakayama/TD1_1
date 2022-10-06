@@ -43,7 +43,6 @@ void CollisionManager::CheckAllCollisions(Player* player, WallManager* wall)
 			{
 				colliderA->OnCollision();
 				colliderB->OnCollision();
-				exit(1);
 			}
 		}
 	}

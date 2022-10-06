@@ -14,8 +14,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Input* input = nullptr;
 	Audio* audio = nullptr;
 	DebugText* debugText = nullptr;
-	AxisIndicator* axisIndicator = nullptr;
-	PrimitiveDrawer* primitiveDrawer = nullptr;
 	GameScene* gameScene = nullptr;
 
 	// ゲームウィンドウの作成
@@ -37,7 +35,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// テクスチャマネージャの初期化
 	TextureManager::GetInstance()->Initialize(dxCommon->GetDevice());
-	TextureManager::Load("white1x1.png");
 
 	// スプライト静的初期化
 	Sprite::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
@@ -49,12 +46,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();
 
-	// 軸方向表示初期化
-	axisIndicator = AxisIndicator::GetInstance();
-	axisIndicator->Initialize();
-
-	primitiveDrawer = PrimitiveDrawer::GetInstance();
-	primitiveDrawer->Initialize();
 #pragma endregion
 
 	// ゲームシーンの初期化
@@ -62,29 +53,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	gameScene->Initialize();
 
 	// メインループ
-	while (true) {
-		// メッセージ処理
-		if (win->ProcessMessage()) {
-			break;
-		}
-
-		// 入力関連の毎フレーム処理
-		input->Update();
-		// ゲームシーンの毎フレーム処理
-		gameScene->Update();
-		// 軸表示の更新
-		axisIndicator->Update();
-
-		// 描画開始
-		dxCommon->PreDraw();
-		// ゲームシーンの描画
-		gameScene->Draw();
-		// 軸表示の描画
-		axisIndicator->Draw();
-		// プリミティブ描画のリセット
-		primitiveDrawer->Reset();
-		// 描画終了
-		dxCommon->PostDraw();
+	while (!win->ProcessMessage()) {
+		input->Update();		// 入力関連の毎フレーム処理
+		gameScene->Update();	// ゲームシーンの毎フレーム処理
+		dxCommon->PreDraw();	// 描画開始
+		gameScene->Draw();		// ゲームシーンの描画
+		dxCommon->PostDraw();	// 描画終了
 	}
 
 	// 各種解放

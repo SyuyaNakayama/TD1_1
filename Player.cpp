@@ -13,6 +13,9 @@ void Player::Move()
 	viewProjection_->eye += moveSpd;
 	viewProjection_->target += moveSpd;
 	viewProjection_->UpdateMatrix();
+	mapCamera_->eye += moveSpd;
+	mapCamera_->target += moveSpd;
+	mapCamera_->UpdateMatrix();
 }
 
 void Player::Rotate()
@@ -23,11 +26,12 @@ void Player::Rotate()
 	if (worldTransform_.rotation_.y >= XM_2PI) { worldTransform_.rotation_.y = 0; }
 }
 
-void Player::Initialize(ViewProjection* viewProjection)
+void Player::Initialize(ViewProjection* viewProjection,ViewProjection* mapCamera)
 {
 	model_ = Model::Create();
 	input_ = Input::GetInstance();
 	viewProjection_ = viewProjection;
+	mapCamera_ = mapCamera;
 	worldTransform_.Initialize();
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
@@ -43,4 +47,8 @@ void Player::Update()
 void Player::Draw()
 {
 	model_->Draw(worldTransform_, *viewProjection_);
+}
+void Player::Draw(ViewProjection viewProjection)
+{
+	model_->Draw(worldTransform_, viewProjection);
 }

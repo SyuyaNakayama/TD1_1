@@ -6,27 +6,27 @@
 #include <d3dx12.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
-
+#include "Vector2.h"
 #include "WinApp.h"
 
 /// <summary>
 /// DirectX汎用
 /// </summary>
 class DirectXCommon {
-  public: // メンバ関数
+public: // メンバ関数
 
-	/// <summary>
-	/// シングルトンインスタンスの取得
-	/// </summary>
-	/// <returns></returns>
+  /// <summary>
+  /// シングルトンインスタンスの取得
+  /// </summary>
+  /// <returns></returns>
 	static DirectXCommon* GetInstance();
-		  
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
 	void Initialize(
-	  WinApp* win, int32_t backBufferWidth = WinApp::kWindowWidth,
-	  int32_t backBufferHeight = WinApp::kWindowHeight);
+		WinApp* win, int32_t backBufferWidth = WinApp::kWindowWidth,
+		int32_t backBufferHeight = WinApp::kWindowHeight);
 
 	/// <summary>
 	/// 描画前処理
@@ -65,15 +65,20 @@ class DirectXCommon {
 	/// </summary>
 	/// <returns>バックバッファの幅</returns>
 	int32_t GetBackBufferWidth() const;
-
+	 
 	/// <summary>
 	/// バックバッファの高さ取得
 	/// </summary>
 	/// <returns>バックバッファの高さ</returns>
 	int32_t GetBackBufferHeight() const;
 
-  private: // メンバ変数
-	// ウィンドウズアプリケーション管理
+	void SetViewport()
+	{
+		viewport = CD3DX12_VIEWPORT(1080.0f, 0.0f, 200.0f, 200.0f);
+		commandList_->RSSetViewports(1, &viewport);
+	}
+private: // メンバ変数
+  // ウィンドウズアプリケーション管理
 	WinApp* winApp_;
 
 	// Direct3D関連
@@ -91,13 +96,13 @@ class DirectXCommon {
 	UINT64 fenceVal_ = 0;
 	int32_t backBufferWidth_ = 0;
 	int32_t backBufferHeight_ = 0;
-
-  private: // メンバ関数
+	CD3DX12_VIEWPORT viewport{};
+private: // メンバ関数
 	DirectXCommon() = default;
 	~DirectXCommon() = default;
 	DirectXCommon(const DirectXCommon&) = delete;
 	const DirectXCommon& operator=(const DirectXCommon&) = delete;
-		   
+
 	/// <summary>
 	/// DXGIデバイス初期化
 	/// </summary>

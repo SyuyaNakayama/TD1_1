@@ -16,9 +16,16 @@ void GameScene::Initialize() {
 	// ビュープロジェクションの初期化
 	viewProjection_.eye.z = -20.0f;
 	viewProjection_.eye.y = 10.0f;
+	viewProjection_.aspectRatio = 3.0f / 2.0f;
+	//viewProjection_.aspectRatio = 1;
 	viewProjection_.Initialize();
+
+	mapCamera_.eye = { 0,250.0f,0 };
+	mapCamera_.target.x = 0.0001f;
+	mapCamera_.aspectRatio = 1.0f;
+	mapCamera_.Initialize();
 	// プレイヤーの初期化
-	player_.Initialize(&viewProjection_);
+	player_.Initialize(&viewProjection_, &mapCamera_);
 	// 壁の初期化
 	wallManager_.Initialize();
 }
@@ -49,16 +56,20 @@ void GameScene::Draw() {
 	// 深度バッファクリア
 	dxCommon_->ClearDepthBuffer();
 #pragma endregion
-
 #pragma region 3Dオブジェクト描画
 	// 3Dオブジェクト描画前処理
 	Model::PreDraw(commandList);
-
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+
 	wallManager_.AllDraw(viewProjection_);
 	player_.Draw();
+	dxCommon_->SetViewport();
+	wallManager_.AllDraw(mapCamera_);
+	player_.Draw(mapCamera_);
+	//wallManager_.AllDraw(mapCamera_);
+	//player_.Draw(mapCamera_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
