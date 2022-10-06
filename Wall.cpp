@@ -3,8 +3,8 @@
 void Wall::Initialize(Vector2 pos, Vector2 radius)
 {
 	model_ = Model::Create();
-	worldTransform_.translation_ = { pos.x,Y_POS_RAD,pos.y };
-	worldTransform_.scale_ = { radius.x,Y_POS_RAD,radius.y };
+	worldTransform_.translation_ = { pos.x,Y_POS,pos.y };
+	worldTransform_.scale_ = { radius.x,Y_RAD ,radius.y };
 	worldTransform_.Initialize();
 	worldTransform_.Update();
 	SetCollisionAttribute(CollisionAttribute::Wall);

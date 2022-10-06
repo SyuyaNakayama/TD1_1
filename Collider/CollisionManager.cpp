@@ -5,7 +5,7 @@
 using namespace std;
 
 // 2Dベクトル外積による当たり判定
-bool CollisionManager::CheckCrossBoxCollisionPair(Collider* colliderA, Collider* colliderB)
+bool CollisionManager::CheckBoxCollisionPair(Collider* colliderA, Collider* colliderB)
 {
 	if (!(colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) ||
 		!(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()))
@@ -39,7 +39,7 @@ void CollisionManager::CheckAllCollisions(Player* player, WallManager* wall)
 		for (; itrB != colliders_.end(); ++itrB)
 		{
 			Collider* colliderB = *itrB;
-			if (CheckCrossBoxCollisionPair(colliderA, colliderB))
+			if (CheckBoxCollisionPair(colliderA, colliderB))
 			{
 				colliderA->OnCollision();
 				colliderB->OnCollision();

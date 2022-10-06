@@ -10,7 +10,8 @@ class Wall :public Collider
 private:
 	WorldTransform worldTransform_;
 	Model* model_ = nullptr;
-	const float Y_POS_RAD = -20.0f;
+	const float Y_POS = -20.0f;
+	const float Y_RAD = fabs(Y_POS)*2.0f;
 public:
 	void Initialize(Vector2 pos, Vector2 radius); // İ’è’l‚Íx,z‚Ì‚İ,y’l‚ÍŒÅ’è
 	void Draw(ViewProjection viewProjection);

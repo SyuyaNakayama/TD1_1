@@ -7,7 +7,7 @@
 class CollisionManager
 {
 private:
-	bool CheckCrossBoxCollisionPair(Collider* colliderA, Collider* colliderB);
+	bool CheckBoxCollisionPair(Collider* colliderA, Collider* colliderB);
 public:
 	void CheckAllCollisions(Player* player, WallManager* wall);
 };

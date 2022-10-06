@@ -21,7 +21,6 @@ void GameScene::Initialize() {
 	player_.Initialize(&viewProjection_);
 	// 壁の初期化
 	wallManager_.Initialize();
-	wall_.Initialize({ -50.0f,0 }, { 20.0f,50.0f });
 }
 
 void GameScene::Update()
@@ -58,8 +57,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	//wallManager_.AllDraw(viewProjection_);
-	wall_.Draw(viewProjection_);
+	wallManager_.AllDraw(viewProjection_);
 	player_.Draw();
 
 	// 3Dオブジェクト描画後処理
