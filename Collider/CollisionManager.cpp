@@ -1,11 +1,11 @@
 #include "CollisionManager.h"
 #include "CollisionConfig.h"
 #include <list>
-#include <memory>
 
 using namespace std;
 
-bool CollisionManager::CheckBoxCollisionPair(Collider* colliderA, Collider* colliderB)
+// 2Dベクトル外積による当たり判定
+bool CollisionManager::CheckCrossBoxCollisionPair(Collider* colliderA, Collider* colliderB)
 {
 	if (!(colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) ||
 		!(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()))
@@ -22,9 +22,12 @@ bool CollisionManager::CheckBoxCollisionPair(Collider* colliderA, Collider* coll
 	return 0;
 }
 
-void CollisionManager::CheckAllCollisions(Player* player, Wall* wall)
+void CollisionManager::CheckAllCollisions(Player* player, WallManager* wall)
 {
 	list<Collider*> colliders_;
+	colliders_.push_back(player);
+	vector<Wall> walls = wall->GetWalls();
+	for (size_t i = 0; i < walls.size(); i++) { colliders_.push_back(&walls[i]); }
 
 	list<Collider*>::iterator itrA = colliders_.begin();
 	for (; itrA != colliders_.end(); ++itrA)
@@ -36,10 +39,11 @@ void CollisionManager::CheckAllCollisions(Player* player, Wall* wall)
 		for (; itrB != colliders_.end(); ++itrB)
 		{
 			Collider* colliderB = *itrB;
-			if (CheckBoxCollisionPair(colliderA, colliderB))
+			if (CheckCrossBoxCollisionPair(colliderA, colliderB))
 			{
 				colliderA->OnCollision();
 				colliderB->OnCollision();
+				exit(1);
 			}
 		}
 	}

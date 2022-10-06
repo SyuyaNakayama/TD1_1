@@ -8,22 +8,29 @@ void Player::Move()
 {
 	if (!input_->PushKey(DIK_SPACE)) { return; }
 
-	worldTransform_.translation_ += Vector3(0, 0, MOVE_SPD) * Matrix4RotationY(angle_);
+	Vector3 moveSpd = Vector3(0, 0, MOVE_SPD) * Matrix4RotationY(worldTransform_.rotation_.y);
+	worldTransform_.translation_ += moveSpd;
+	viewProjection_->eye += moveSpd;
+	viewProjection_->target += moveSpd;
+	viewProjection_->UpdateMatrix();
 }
 
 void Player::Rotate()
 {
 	if (input_->PushKey(DIK_SPACE)) { return; }
 
-	angle_ += ROT_SPD;
-	if (angle_ >= XM_2PI) { angle_ = 0; }
+	worldTransform_.rotation_.y += ROT_SPD;
+	if (worldTransform_.rotation_.y >= XM_2PI) { worldTransform_.rotation_.y = 0; }
 }
 
-void Player::Initialize()
+void Player::Initialize(ViewProjection* viewProjection)
 {
 	model_ = Model::Create();
 	input_ = Input::GetInstance();
+	viewProjection_ = viewProjection;
 	worldTransform_.Initialize();
+	SetCollisionAttribute(CollisionAttribute::Player);
+	SetCollisionMask(CollisionMask::Player);
 }
 
 void Player::Update()
@@ -33,7 +40,7 @@ void Player::Update()
 	worldTransform_.Update();
 }
 
-void Player::Draw(ViewProjection viewProjection)
+void Player::Draw()
 {
-	model_->Draw(worldTransform_, viewProjection);
+	model_->Draw(worldTransform_, *viewProjection_);
 }

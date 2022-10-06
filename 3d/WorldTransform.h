@@ -52,9 +52,9 @@ struct WorldTransform {
 	void Update() {
 		Matrix4 matScale = MathUtility::Matrix4Scaling(scale_.x, scale_.y, scale_.z),
 			
-			matRot = MathUtility::Matrix4RotationX(rotation_.x) * 
-			MathUtility::Matrix4RotationX(rotation_.y) * 
-			MathUtility::Matrix4RotationX(rotation_.z),
+			matRot = MathUtility::Matrix4RotationZ(rotation_.z) * 
+			MathUtility::Matrix4RotationX(rotation_.x) * 
+			MathUtility::Matrix4RotationY(rotation_.y),
 			
 			matTrans = MathUtility::Matrix4Translation(translation_.x, translation_.y, translation_.z);
 

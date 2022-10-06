@@ -11,6 +11,8 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Player.h"
+#include "Wall.h"
+#include "Collider/CollisionManager.h"
 #include <vector>
 
 /// <summary>
@@ -41,6 +43,8 @@ class GameScene {
 	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
 	ViewProjection viewProjection_;
+	CollisionManager collisionManager_;
 	Player player_;
-	std::vector<WorldTransform> walls;
+	WallManager wallManager_;
+	Wall wall_;
 };

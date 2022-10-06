@@ -1,12 +1,13 @@
 #pragma once
 #include "Collider.h"
 #include "Player.h"
-#include "Wall.h"
+#include "WallManager.h"
+#include <vector>
 
 class CollisionManager
 {
 private:
-	bool CheckBoxCollisionPair(Collider* colliderA, Collider* colliderB);
+	bool CheckCrossBoxCollisionPair(Collider* colliderA, Collider* colliderB);
 public:
-	void CheckAllCollisions(Player* player, Wall* wall);
+	void CheckAllCollisions(Player* player, WallManager* wall);
 };

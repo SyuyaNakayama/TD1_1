@@ -14,26 +14,22 @@ void GameScene::Initialize() {
 	debugCamera_ = new DebugCamera({ WinApp::kWindowWidth,WinApp::kWindowHeight });
 	model_ = Model::Create();
 	// ビュープロジェクションの初期化
+	viewProjection_.eye.z = -20.0f;
+	viewProjection_.eye.y = 10.0f;
 	viewProjection_.Initialize();
-	viewProjection_.eye.z = -10.0f;
 	// プレイヤーの初期化
-	player_.Initialize();
+	player_.Initialize(&viewProjection_);
 	// 壁の初期化
-	walls.resize(2);
-	walls[0].translation_ = { -50.0f,-25.0f,0 };
-	walls[1].translation_ = { 50.0f,-25.0f,0 };
-	for (size_t i = 0; i < walls.size(); i++)
-	{
-		walls[i].Initialize();
-		walls[i].scale_ = { 20.0f,50.0f,50.0f };
-		walls[i].Update();
-	}
+	wallManager_.Initialize();
+	wall_.Initialize({ -50.0f,0 }, { 20.0f,50.0f });
 }
 
 void GameScene::Update()
 {
 	player_.Update();
+	collisionManager_.CheckAllCollisions(&player_, &wallManager_);
 	debugCamera_->Update();
+	//viewProjection_ = debugCamera_->GetViewProjection();
 }
 
 void GameScene::Draw() {
@@ -62,11 +58,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	for (size_t i = 0; i < walls.size(); i++)
-	{
-		model_->Draw(walls[i], debugCamera_->GetViewProjection());
-	}
-	player_.Draw(debugCamera_->GetViewProjection());
+	//wallManager_.AllDraw(viewProjection_);
+	wall_.Draw(viewProjection_);
+	player_.Draw();
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
