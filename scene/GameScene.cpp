@@ -20,9 +20,11 @@ void GameScene::Initialize() {
 	//viewProjection_.aspectRatio = 1;
 	viewProjection_.Initialize();
 
-	mapCamera_.eye = { 0,250.0f,0 };
-	mapCamera_.target.x = 0.0001f;
+	mapCamera_.eye = { 0,4000.0f,0 };
+	mapCamera_.target.x = 0.01f;
 	mapCamera_.aspectRatio = 1.0f;
+	mapCamera_.fovAngleY = 3.0f * PI / 180.0f;
+	mapCamera_.farZ = 4500.0f;
 	mapCamera_.Initialize();
 	// プレイヤーの初期化
 	player_.Initialize(&viewProjection_, &mapCamera_);
@@ -62,15 +64,13 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-
 	wallManager_.AllDraw(viewProjection_);
 	player_.Draw();
-	dxCommon_->SetViewport();
+
+	dxCommon_->SetViewport(); // ビューポート切り替え
+
 	wallManager_.AllDraw(mapCamera_);
 	player_.Draw(mapCamera_);
-	//wallManager_.AllDraw(mapCamera_);
-	//player_.Draw(mapCamera_);
-
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion
