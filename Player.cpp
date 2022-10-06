@@ -32,6 +32,7 @@ void Player::Initialize(ViewProjection* viewProjection,ViewProjection* mapCamera
 	input_ = Input::GetInstance();
 	viewProjection_ = viewProjection;
 	mapCamera_ = mapCamera;
+	worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
 	worldTransform_.Initialize();
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
