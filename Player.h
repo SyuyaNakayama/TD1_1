@@ -29,5 +29,4 @@ public:
 	void OnCollision() { life_--; }
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
 	const Vector3 GetRadius() { return worldTransform_.scale_; }
-	const float GetRotateY() { return worldTransform_.rotation_.y; }
 };

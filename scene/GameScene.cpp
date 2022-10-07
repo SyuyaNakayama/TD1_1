@@ -17,7 +17,6 @@ void GameScene::Initialize() {
 	viewProjection_.eye.z = -20.0f;
 	viewProjection_.eye.y = 10.0f;
 	viewProjection_.aspectRatio = 3.0f / 2.0f;
-	//viewProjection_.aspectRatio = 1;
 	viewProjection_.Initialize();
 
 	mapCamera_.eye = { 0,4000.0f,0 };
@@ -25,6 +24,7 @@ void GameScene::Initialize() {
 	mapCamera_.aspectRatio = 1.0f;
 	mapCamera_.fovAngleY = 3.0f * PI / 180.0f;
 	mapCamera_.farZ = 4500.0f;
+	mapCamera_.up = { 0,0,1 };
 	mapCamera_.Initialize();
 	// プレイヤーの初期化
 	player_.Initialize(&viewProjection_, &mapCamera_);

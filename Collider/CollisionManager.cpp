@@ -22,28 +22,30 @@ bool CollisionManager::CheckBoxCollisionPair(Collider* colliderA, Collider* coll
 	return 0;
 }
 
-void CollisionManager::CheckAllCollisions(Player* player, WallManager* wall)
+void CollisionManager::CheckAllCollisions(Player* player, WallManager* wallManager)
 {
 	list<Collider*> colliders_;
+
+	vector<Wall> walls = wallManager->GetWalls();
+	Goal goal = wallManager->GetGoal();
+
 	colliders_.push_back(player);
-	vector<Wall> walls = wall->GetWalls();
 	for (size_t i = 0; i < walls.size(); i++) { colliders_.push_back(&walls[i]); }
+	colliders_.push_back(&goal);
 
 	list<Collider*>::iterator itrA = colliders_.begin();
-	for (; itrA != colliders_.end(); ++itrA)
-	{
-		Collider* colliderA = *itrA;
-		list<Collider*>::iterator itrB = itrA;
-		itrB++;
 
-		for (; itrB != colliders_.end(); ++itrB)
+	Collider* colliderA = *colliders_.begin();
+	list<Collider*>::iterator itrB = itrA;
+	itrB++;
+
+	for (; itrB != colliders_.end(); ++itrB)
+	{
+		Collider* colliderB = *itrB;
+		if (CheckBoxCollisionPair(colliderA, colliderB))
 		{
-			Collider* colliderB = *itrB;
-			if (CheckBoxCollisionPair(colliderA, colliderB))
-			{
-				colliderA->OnCollision();
-				colliderB->OnCollision();
-			}
+			colliderA->OnCollision();
+			colliderB->OnCollision();
 		}
 	}
 }

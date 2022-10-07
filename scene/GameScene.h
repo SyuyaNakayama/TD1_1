@@ -47,5 +47,5 @@ class GameScene {
 	CollisionManager collisionManager_;
 	Player player_;
 	WallManager wallManager_;
-	Wall wall_;
+	UINT32 stage_ = 1;
 };
