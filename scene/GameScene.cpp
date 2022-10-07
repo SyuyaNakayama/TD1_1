@@ -67,7 +67,7 @@ void GameScene::Draw() {
 	wallManager_.AllDraw(viewProjection_);
 	player_.Draw();
 
-	dxCommon_->SetViewport(); // ビューポート切り替え
+	dxCommon_->SetViewport({ 1080.0f, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
 
 	wallManager_.AllDraw(mapCamera_);
 	player_.Draw(mapCamera_);
@@ -82,6 +82,8 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+	dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
+	player_.SpriteDraw();
 
 	// デバッグテキストの描画
 	debugText_->DrawAll(commandList);

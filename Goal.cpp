@@ -22,7 +22,7 @@ void Goal::SetGoal(int stage)
 	switch (stage)
 	{
 	case 1:
-		worldTransform_.translation_ = { 30.0f,Y_POS,50.0f };
+		worldTransform_.translation_ = { 0,Y_POS,160.0f };
 		break;
 	}
 	worldTransform_.Update();

@@ -72,9 +72,9 @@ public: // メンバ関数
 	/// <returns>バックバッファの高さ</returns>
 	int32_t GetBackBufferHeight() const;
 
-	void SetViewport()
+	void SetViewport(Vector2 leftTop,Vector2 rightBottom)
 	{
-		viewport = CD3DX12_VIEWPORT(1080.0f, 0.0f, 200.0f, 200.0f);
+		viewport = CD3DX12_VIEWPORT(leftTop.x,leftTop.y, rightBottom.x,rightBottom.y);
 		commandList_->RSSetViewports(1, &viewport);
 	}
 private: // メンバ変数

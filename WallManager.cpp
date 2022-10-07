@@ -15,13 +15,16 @@ void WallManager::AllDraw(ViewProjection viewProjection)
 
 void WallManager::SetWalls(UINT32 stage)
 {
-	if (!walls_.empty()) { walls_.clear(); }
+	walls_.clear();
+
 	switch (stage)
 	{
 	case 1:
-		walls_.resize(2);
-		walls_[0].Initialize({ -50.0f,0 }, { 20.0f,50.0f });
-		walls_[1].Initialize({ 50.0f,0 }, { 20.0f,50.0f });
+		walls_.resize(4);
+		walls_[0].Initialize({ -50.0f,70.0f }, { 20.0f,100.0f });
+		walls_[1].Initialize({ +50.0f,70.0f }, { 20.0f,100.0f });
+		walls_[2].Initialize({ 0,-50.0f }, { 70.0f,20.0f });
+		walls_[3].Initialize({ 0,190.0f }, { 70.0f,20.0f });
 		break;
 	}
 }
