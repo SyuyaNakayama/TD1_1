@@ -38,7 +38,7 @@ void GameScene::Update()
 	collisionManager_.CheckAllCollisions(&player_, &wallManager_);
 	debugCamera_->Update();
 
-	if (wallManager_.IsGoal())
+	if (wallManager_.GetGoal()->IsGoal())
 	{
 		wallManager_.SetStage(++stage_);
 		player_.LifeInit();

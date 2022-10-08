@@ -4,22 +4,19 @@
 
 using namespace std;
 
-// 2Dベクトル外積による当たり判定
 bool CollisionManager::CheckBoxCollisionPair(Collider* colliderA, Collider* colliderB)
 {
 	if (!(colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) ||
 		!(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()))
 	{
-		return 0;
+		return false;
 	}
 
 	Vector3 vecAB = colliderA->GetWorldPosition() - colliderB->GetWorldPosition();
 	Vector3 radAB = colliderA->GetRadius() + colliderB->GetRadius();
 	vecAB = vecAB.abs();
 
-	if (vecAB <= radAB) { return 1; }
-
-	return 0;
+	return vecAB <= radAB;
 }
 
 void CollisionManager::CheckAllCollisions(Player* player, WallManager* wallManager)
@@ -27,11 +24,11 @@ void CollisionManager::CheckAllCollisions(Player* player, WallManager* wallManag
 	list<Collider*> colliders_;
 
 	vector<Wall> walls = wallManager->GetWalls();
-	Goal goal = wallManager->GetGoal();
+	Goal* goal = wallManager->GetGoal();
 
 	colliders_.push_back(player);
-	for (size_t i = 0; i < walls.size(); i++) { colliders_.push_back(&walls[i]); }
-	colliders_.push_back(&goal);
+	for (Wall& wall : walls) { colliders_.push_back(&wall); }
+	colliders_.push_back(goal);
 
 	list<Collider*>::iterator itrA = colliders_.begin();
 

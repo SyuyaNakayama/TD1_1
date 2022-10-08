@@ -9,7 +9,7 @@ class WallManager :Collider
 {
 private:
 	std::vector<Wall> walls_;
-	Goal goal_;
+	std::unique_ptr<Goal> goal_;
 
 public:
 	void Initialize();
@@ -17,8 +17,7 @@ public:
 
 	std::vector<Wall> GetWalls() { return walls_; }
 	void SetStage(UINT32 stage);
-	Goal GetGoal() { return goal_; }
-	bool IsGoal() { return goal_.IsGoal(); }
+	Goal* GetGoal() { return goal_.get(); }
 
 	void OnCollision() {};
 	const Vector3 GetWorldPosition() { return {}; }
