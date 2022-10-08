@@ -149,6 +149,12 @@ int32_t DirectXCommon::GetBackBufferWidth() const { return backBufferWidth_; }
 
 int32_t DirectXCommon::GetBackBufferHeight() const { return backBufferHeight_; }
 
+void DirectXCommon::SetViewport(Vector2 leftTop, Vector2 rightBottom)
+{
+	viewport = CD3DX12_VIEWPORT(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
+	commandList_->RSSetViewports(1, &viewport);
+}
+
 void DirectXCommon::InitializeDXGIDevice() {
 	HRESULT result = S_FALSE;
 

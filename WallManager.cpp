@@ -2,9 +2,8 @@
 
 void WallManager::Initialize()
 {
-	SetWalls(1);
 	goal_.Initialize();
-	goal_.SetGoal(1);
+	SetStage(1);
 }
 
 void WallManager::AllDraw(ViewProjection viewProjection)
@@ -13,7 +12,7 @@ void WallManager::AllDraw(ViewProjection viewProjection)
 	goal_.Draw(viewProjection);
 }
 
-void WallManager::SetWalls(UINT32 stage)
+void WallManager::SetStage(UINT32 stage)
 {
 	walls_.clear();
 
@@ -27,4 +26,5 @@ void WallManager::SetWalls(UINT32 stage)
 		walls_[3].Initialize({ 0,190.0f }, { 70.0f,20.0f });
 		break;
 	}
+	goal_.SetGoal(stage);
 }

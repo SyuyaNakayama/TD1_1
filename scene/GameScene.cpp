@@ -37,6 +37,17 @@ void GameScene::Update()
 	player_.Update();
 	collisionManager_.CheckAllCollisions(&player_, &wallManager_);
 	debugCamera_->Update();
+
+	if (wallManager_.IsGoal())
+	{
+		wallManager_.SetStage(++stage_);
+		player_.LifeInit();
+	}
+
+	debugText_->SetPos(0, 0);
+	debugText_->Printf("stage_:%u", stage_);
+	debugText_->SetPos(0, 20);
+	debugText_->Printf("life:%d", player_.GetLife());
 	//viewProjection_ = debugCamera_->GetViewProjection();
 }
 

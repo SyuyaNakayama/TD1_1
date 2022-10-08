@@ -15,7 +15,8 @@ private:
 	Model* model_ = nullptr;
 	const float MOVE_SPD = 1.0f;
 	const float ROT_SPD = 0.03f;
-	int life_ = 3;
+	const int MAX_LIFE = 3;
+	int life_ = MAX_LIFE;
 	ViewProjection* viewProjection_ = nullptr;
 	ViewProjection* mapCamera_ = nullptr;
 	Sprite* sprite_ = nullptr;
@@ -30,7 +31,10 @@ public:
 	void Draw();
 	void Draw(ViewProjection viewProjection);
 
-	void OnCollision() { life_--; }
+	void LifeInit() { life_ = MAX_LIFE; }
+	int GetLife() { return life_; }
+
+	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
 	const Vector3 GetRadius() { return worldTransform_.scale_; }
 };
