@@ -22,7 +22,7 @@ void GameScene::Initialize() {
 	viewProjection_.eye.y = 10.0f;
 	viewProjection_.aspectRatio = 3.0f / 2.0f;
 	viewProjection_.Initialize();
-
+	// マップカメラの初期化
 	mapCamera_.eye = { 0,4000.0f,0 };
 	mapCamera_.target.x = 0.01f;
 	mapCamera_.aspectRatio = 1.0f;
@@ -34,24 +34,41 @@ void GameScene::Initialize() {
 	player_.Initialize(&viewProjection_, &mapCamera_);
 	// 壁の初期化
 	wallManager_.Initialize();
+	// フェードマネージャーの初期化
+	fadeManager_.Initialize();
 }
 
 void GameScene::Update()
 {
-	player_.Update();
-	collisionManager_.CheckAllCollisions(&player_, &wallManager_);
-	debugCamera_->Update();
-
-	if (wallManager_.GetGoal()->IsGoal())
+	fadeManager_.Update();
+	switch (scene_)
 	{
-		wallManager_.SetStage(++stage_);
-		player_.LifeInit();
+	case GameScene::Title:
+		break;
+	case GameScene::HowToPlay:
+		break;
+	case GameScene::Play:
+		player_.Update();
+		collisionManager_.CheckAllCollisions(&player_, &wallManager_);
+		debugCamera_->Update();
+
+		if (wallManager_.GetGoal()->IsGoal())
+		{
+			wallManager_.SetStage(++stage_);
+			player_.LifeInit();
+		}
+
+		break;
+	case GameScene::Clear:
+		break;
+	case GameScene::GameOver:
+		break;
 	}
 
-	debugText_->SetPos(0, 0);
-	debugText_->Printf("stage_:%u", stage_);
-	debugText_->SetPos(0, 20);
-	debugText_->Printf("life:%d", player_.GetLife());
+	//debugText_->SetPos(0, 0);
+	//debugText_->Printf("stage_:%u", stage_);
+	//debugText_->SetPos(0, 20);
+	//debugText_->Printf("life:%d", player_.GetLife());
 	//viewProjection_ = debugCamera_->GetViewProjection();
 }
 
@@ -67,29 +84,34 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-	dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
-	sprite_->Draw();
-
+	if (scene_ == Play)
+	{
+		dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
+		sprite_->Draw();
+	}
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
 	dxCommon_->ClearDepthBuffer();
 #pragma endregion
 #pragma region 3Dオブジェクト描画
-	// 3Dオブジェクト描画前処理
-	Model::PreDraw(commandList);
-	/// <summary>
-	/// ここに3Dオブジェクトの描画処理を追加できる
-	/// </summary>
-	dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
-	wallManager_.AllDraw(viewProjection_);
-	player_.Draw();
+	if (scene_ == Play)
+	{
+		// 3Dオブジェクト描画前処理
+		Model::PreDraw(commandList);
+		/// <summary>
+		/// ここに3Dオブジェクトの描画処理を追加できる
+		/// </summary>
+		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
+		wallManager_.AllDraw(viewProjection_);
+		player_.Draw();
 
-	dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
-	wallManager_.AllDraw(mapCamera_);
-	player_.Draw(mapCamera_);
-	// 3Dオブジェクト描画後処理
-	Model::PostDraw();
+		dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
+		wallManager_.AllDraw(mapCamera_);
+		player_.Draw(mapCamera_);
+		// 3Dオブジェクト描画後処理
+		Model::PostDraw();
+	}
 #pragma endregion
 
 #pragma region 前景スプライト描画
@@ -99,8 +121,12 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
-	dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
-	player_.SpriteDraw();
+	if (scene_ == Play)
+	{
+		dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
+		player_.SpriteDraw();
+	}
+	fadeManager_.Draw();
 
 	// デバッグテキストの描画
 	debugText_->DrawAll(commandList);

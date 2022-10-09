@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <vector>
 #include "Audio.h"
 #include "DirectXCommon.h"
 #include "DebugText.h"
@@ -13,16 +14,18 @@
 #include "player/Player.h"
 #include "stage/Wall.h"
 #include "Collider/CollisionManager.h"
-#include <vector>
+#include "Fade/Fade.h"
 
 /// <summary>
 /// ゲームシーン
 /// </summary>
 class GameScene {
-  public: // メンバ関数
+private: // サブクラス
+	enum Scene { Title, HowToPlay, Play, Clear, GameOver };
+public: // メンバ関数
 	/// <summary>
 	/// 初期化
-	/// </summary>
+	 /// </summary>
 	void Initialize();
 
 	/// <summary>
@@ -35,7 +38,7 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
-  private: // メンバ変数
+private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
@@ -47,7 +50,9 @@ class GameScene {
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
 	CollisionManager collisionManager_;
+	Scene scene_ = Play;
 	Player player_;
 	WallManager wallManager_;
 	UINT32 stage_ = 1;
+	Fade fadeManager_;
 };

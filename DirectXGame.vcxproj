@@ -100,6 +100,7 @@
     <ClCompile Include="base\TextureManager.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="Collider\CollisionManager.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\Vector3.cpp" />
     <ClCompile Include="player\Player.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Collider\Collider.h" />
     <ClInclude Include="Collider\CollisionConfig.h" />
     <ClInclude Include="Collider\CollisionManager.h" />
+    <ClInclude Include="Fade\Fade.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="math\MathUtility.h" />
     <ClInclude Include="math\Matrix4.h" />
