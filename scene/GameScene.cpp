@@ -13,6 +13,10 @@ void GameScene::Initialize() {
 	debugText_ = DebugText::GetInstance();
 	debugCamera_ = new DebugCamera({ WinApp::kWindowWidth,WinApp::kWindowHeight });
 	model_ = Model::Create();
+
+	uiTexture_ = TextureManager::Load("white1x1.png");
+	sprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
+	sprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
 	// ビュープロジェクションの初期化
 	viewProjection_.eye.z = -20.0f;
 	viewProjection_.eye.y = 10.0f;
@@ -63,6 +67,8 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
+	dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
+	sprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -75,11 +81,11 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+	dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
 	wallManager_.AllDraw(viewProjection_);
 	player_.Draw();
 
-	dxCommon_->SetViewport({ 1080.0f, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
-
+	dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
 	wallManager_.AllDraw(mapCamera_);
 	player_.Draw(mapCamera_);
 	// 3Dオブジェクト描画後処理

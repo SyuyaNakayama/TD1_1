@@ -22,9 +22,6 @@
     <Filter Include="ヘッダー ファイル\2d">
       <UniqueIdentifier>{96135050-efba-425e-a9fe-8881bd7caad8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\audo">
-      <UniqueIdentifier>{3a0044cc-1b7d-4ed5-a1a6-9074ed1b1769}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\base">
       <UniqueIdentifier>{551d5cf3-f4a6-49b9-832f-076a33cef817}</UniqueIdentifier>
     </Filter>
@@ -52,6 +49,15 @@
     <Filter Include="ヘッダー ファイル\collider">
       <UniqueIdentifier>{7a183b69-bd16-47d2-bfa9-f2cecd27e0b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\stage">
+      <UniqueIdentifier>{502ee7cd-9920-4378-abdc-8cf61dd1a451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\stage">
+      <UniqueIdentifier>{6bf8a1c7-0d3c-4749-a779-d70ec0ccb2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\audio">
+      <UniqueIdentifier>{3a0044cc-1b7d-4ed5-a1a6-9074ed1b1769}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,20 +78,20 @@
     <ClCompile Include="Collider\CollisionManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="math\Vector3.cpp">
       <Filter>ソース ファイル\math</Filter>
     </ClCompile>
-    <ClCompile Include="WallManager.cpp">
+    <ClCompile Include="player\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Goal.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="stage\Goal.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\Wall.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\WallManager.cpp">
+      <Filter>ソース ファイル\stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +135,7 @@
       <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
     <ClInclude Include="audio\Audio.h">
-      <Filter>ヘッダー ファイル\audo</Filter>
+      <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
     <ClInclude Include="base\DirectXCommon.h">
       <Filter>ヘッダー ファイル\base</Filter>
@@ -185,17 +191,17 @@
     <ClInclude Include="Collider\CollisionManager.h">
       <Filter>ヘッダー ファイル\collider</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="player\Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="stage\Goal.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
     </ClInclude>
-    <ClInclude Include="WallManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="stage\Wall.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
     </ClInclude>
-    <ClInclude Include="Goal.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="stage\WallManager.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

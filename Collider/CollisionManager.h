@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
-#include "Player.h"
-#include "WallManager.h"
+#include "player/Player.h"
+#include "stage/WallManager.h"
 #include <vector>
 
 class CollisionManager

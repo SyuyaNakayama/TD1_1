@@ -10,8 +10,8 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Player.h"
-#include "Wall.h"
+#include "player/Player.h"
+#include "stage/Wall.h"
 #include "Collider/CollisionManager.h"
 #include <vector>
 
@@ -42,6 +42,8 @@ class GameScene {
 	DebugText* debugText_ = nullptr;
 	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
+	Sprite* sprite_ = nullptr;
+	uint32_t uiTexture_ = 0;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
 	CollisionManager collisionManager_;

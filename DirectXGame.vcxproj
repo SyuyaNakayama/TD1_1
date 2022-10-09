@@ -100,13 +100,13 @@
     <ClCompile Include="base\TextureManager.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="Collider\CollisionManager.cpp" />
-    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\Vector3.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="player\Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
-    <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="WallManager.cpp" />
+    <ClCompile Include="stage\Goal.cpp" />
+    <ClCompile Include="stage\Wall.cpp" />
+    <ClCompile Include="stage\WallManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
@@ -134,17 +134,17 @@
     <ClInclude Include="Collider\Collider.h" />
     <ClInclude Include="Collider\CollisionConfig.h" />
     <ClInclude Include="Collider\CollisionManager.h" />
-    <ClInclude Include="Goal.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="math\MathUtility.h" />
     <ClInclude Include="math\Matrix4.h" />
     <ClInclude Include="math\Vector2.h" />
     <ClInclude Include="math\Vector3.h" />
     <ClInclude Include="math\Vector4.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="player\Player.h" />
     <ClInclude Include="scene\GameScene.h" />
-    <ClInclude Include="Wall.h" />
-    <ClInclude Include="WallManager.h" />
+    <ClInclude Include="stage\Goal.h" />
+    <ClInclude Include="stage\Wall.h" />
+    <ClInclude Include="stage\WallManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
