@@ -15,13 +15,7 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
-	for (size_t i = 0; i < 7; i++)
-	{
-		gameoverSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/gameover.png"), {}));
-		gameoverSprite_[i]->SetTextureRect({ WinApp::kWindowWidth * (float)i,0 }, { 1280 * 7,720 });
-	}
-
-	animationManager_.SetSprite(gameoverSprite_, 8);
+	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameover.png"), 7, 8);
 
 	uiTexture_ = TextureManager::Load("white1x1.png");
 	uiSprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });

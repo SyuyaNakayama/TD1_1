@@ -1,8 +1,14 @@
 #include "AnimationManager.h"
 
-void AnimationManager::SetSprite(std::vector<Sprite*> sprite, int frameTime)
+void AnimationManager::SetSprite(uint32_t textureHandle, uint32_t frameNum, int frameTime, Vector2 textureSize)
 {
-	sprite_.push_back(sprite);
+	std::vector<Sprite*> spriteArray;
+	for (uint32_t i = 0; i < frameNum; i++)
+	{
+		spriteArray.push_back(Sprite::Create(textureHandle, {}));
+		spriteArray[i]->SetTextureRect({ textureSize.x * (float)i,0 }, { textureSize.x * frameNum,textureSize.y });
+	}
+	sprite_.push_back(spriteArray);
 	timer_.push_back(frameTime);
 	frame_.push_back(0);
 }
