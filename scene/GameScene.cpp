@@ -13,10 +13,19 @@ void GameScene::Initialize() {
 	debugText_ = DebugText::GetInstance();
 	debugCamera_ = new DebugCamera({ WinApp::kWindowWidth,WinApp::kWindowHeight });
 	model_ = Model::Create();
+	// スプライト生成
+	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
+	for (size_t i = 0; i < 7; i++)
+	{
+		gameoverSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/gameover.png"), {}));
+		gameoverSprite_[i]->SetTextureRect({ WinApp::kWindowWidth * (float)i,0 }, { 1280 * 7,720 });
+	}
+
+	animationManager_.SetSprite(gameoverSprite_, 8);
 
 	uiTexture_ = TextureManager::Load("white1x1.png");
-	sprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
-	sprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
+	uiSprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
+	uiSprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
 	// ビュープロジェクションの初期化
 	viewProjection_.eye.z = -20.0f;
 	viewProjection_.eye.y = 10.0f;
@@ -35,19 +44,19 @@ void GameScene::Initialize() {
 	// 壁の初期化
 	wallManager_.Initialize();
 	// フェードマネージャーの初期化
-	fadeManager_.Initialize();
+	fadeManager_.Initialize(&scene_);
 }
 
 void GameScene::Update()
 {
-	fadeManager_.Update();
+	if (input_->TriggerKey(DIK_0)) { fadeManager_.ChangeScene(GameOver); }
 	switch (scene_)
 	{
-	case GameScene::Title:
+	case Title:
 		break;
-	case GameScene::HowToPlay:
+	case HowToPlay:
 		break;
-	case GameScene::Play:
+	case Play:
 		player_.Update();
 		collisionManager_.CheckAllCollisions(&player_, &wallManager_);
 		debugCamera_->Update();
@@ -59,12 +68,14 @@ void GameScene::Update()
 		}
 
 		break;
-	case GameScene::Clear:
+	case Clear:
 		break;
-	case GameScene::GameOver:
+	case GameOver:
+		animationManager_.Update(0);
 		break;
 	}
 
+	fadeManager_.Update();
 	//debugText_->SetPos(0, 0);
 	//debugText_->Printf("stage_:%u", stage_);
 	//debugText_->SetPos(0, 20);
@@ -84,10 +95,24 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-	if (scene_ == Play)
+	dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
+
+	static int animeNum = 0;
+
+	switch (scene_)
 	{
-		dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
-		sprite_->Draw();
+	case Title:
+		break;
+	case HowToPlay:
+		break;
+	case Play:
+		uiSprite_->Draw();
+		break;
+	case Clear:
+		break;
+	case GameOver:
+		animationManager_.Draw(0);
+		break;
 	}
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -121,9 +146,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+	dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
 	if (scene_ == Play)
 	{
-		dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
 		player_.SpriteDraw();
 	}
 	fadeManager_.Draw();

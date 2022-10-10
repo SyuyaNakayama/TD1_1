@@ -15,13 +15,13 @@
 #include "stage/Wall.h"
 #include "Collider/CollisionManager.h"
 #include "Fade/Fade.h"
+#include "enum.h"
+#include "animationManager/AnimationManager.h"
 
 /// <summary>
 /// ゲームシーン
 /// </summary>
 class GameScene {
-private: // サブクラス
-	enum Scene { Title, HowToPlay, Play, Clear, GameOver };
 public: // メンバ関数
 	/// <summary>
 	/// 初期化
@@ -45,14 +45,17 @@ private: // メンバ変数
 	DebugText* debugText_ = nullptr;
 	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
-	Sprite* sprite_ = nullptr;
+	Sprite* uiSprite_ = nullptr;
+	std::vector<Sprite*> sceneSprite_;
+	std::vector<Sprite*> gameoverSprite_;
 	uint32_t uiTexture_ = 0;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
 	CollisionManager collisionManager_;
-	Scene scene_ = Play;
+	Scene scene_ = Scene::Play;
 	Player player_;
 	WallManager wallManager_;
 	UINT32 stage_ = 1;
 	Fade fadeManager_;
+	AnimationManager animationManager_;
 };

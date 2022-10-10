@@ -96,11 +96,12 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="base\TextureManager.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="Collider\CollisionManager.cpp" />
-    <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="Fade\Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\Vector3.cpp" />
     <ClCompile Include="player\Player.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="stage\Goal.cpp" />
     <ClCompile Include="stage\Wall.cpp" />
     <ClCompile Include="stage\WallManager.cpp" />
+    <ClCompile Include="timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
@@ -127,6 +129,7 @@
     <ClInclude Include="3d\TerrainCommon.h" />
     <ClInclude Include="3d\ViewProjection.h" />
     <ClInclude Include="3d\WorldTransform.h" />
+    <ClInclude Include="AnimationManager\AnimationManager.h" />
     <ClInclude Include="audio\Audio.h" />
     <ClInclude Include="base\DirectXCommon.h" />
     <ClInclude Include="base\SafeDelete.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="Collider\Collider.h" />
     <ClInclude Include="Collider\CollisionConfig.h" />
     <ClInclude Include="Collider\CollisionManager.h" />
+    <ClInclude Include="enum.h" />
     <ClInclude Include="Fade\Fade.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="math\MathUtility.h" />
@@ -147,6 +151,7 @@
     <ClInclude Include="stage\Goal.h" />
     <ClInclude Include="stage\Wall.h" />
     <ClInclude Include="stage\WallManager.h" />
+    <ClInclude Include="timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
