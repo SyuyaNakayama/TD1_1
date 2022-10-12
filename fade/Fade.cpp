@@ -12,11 +12,13 @@ void Fade::Initialize(Scene* nowScene)
 
 void Fade::Update()
 {
+	isChange_ = false;
 	if (!isFade_) { return; }
 
 	alpha_ += fadePerFlame;
 	if (alpha_ >= 1.0f)
 	{
+		isChange_ = true; 
 		alpha_ = 1.0f;
 		fadePerFlame = -fadePerFlame;
 		*nowScene_ = nextScene_;
@@ -37,12 +39,14 @@ void Fade::Draw()
 
 void Fade::FadeScene()
 {
+	if (isFade_) { return; }
 	isFade_ = true;
 	nextScene_ = *nowScene_;
 }
 
 void Fade::ChangeScene(Scene nextScene)
 {
+	if (isFade_) { return; }
 	isFade_ = true;
 	nextScene_ = nextScene;
 }

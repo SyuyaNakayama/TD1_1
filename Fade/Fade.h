@@ -13,6 +13,7 @@ private:
 	float alpha_ = 0;
 	Scene* nowScene_ = nullptr;
 	Scene nextScene_ = Title;
+	bool isChange_ = false;
 
 public:
 	void Initialize(Scene* nowScene);
@@ -21,4 +22,7 @@ public:
 
 	void FadeScene();
 	void ChangeScene(Scene nextScene);
+
+	bool IsChange() { return isChange_; }
+	bool IsFade() { return isFade_; }
 };

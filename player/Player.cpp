@@ -60,18 +60,21 @@ void Player::Draw()
 {
 	model_->Draw(worldTransform_, *viewProjection_);
 }
-void Player::Draw(ViewProjection viewProjection)
-{
-	model_->Draw(worldTransform_, viewProjection);
-}
 
 void Player::OnCollision()
 {
 	life_--;
+}
+
+void Player::Init()
+{
+	life_ = MAX_LIFE;
 	worldTransform_.translation_ = {};
 	worldTransform_.Update();
 	viewProjection_->eye = { 0,10.0f,-20.0f };
 	viewProjection_->target = {};
-	mapCamera_->eye = { 0,4000.0f,0 };;
-	mapCamera_->target = { 0.01f,0,0 };
+	viewProjection_->UpdateMatrix();
+	mapCamera_->eye = { 0,2000.0f,0 };
+	mapCamera_->target = {};
+	mapCamera_->UpdateMatrix();
 }

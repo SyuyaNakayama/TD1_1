@@ -26,14 +26,14 @@ private:
 	void Move();
 	void Rotate();
 public:
-	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera,uint32_t* stage);
+	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage);
 	void Update();
 	void SpriteDraw();
 	void Draw();
-	void Draw(ViewProjection viewProjection);
 
-	void LifeInit() { life_ = MAX_LIFE; }
+	void Init();
 	int GetLife() { return life_; }
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 
 	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }

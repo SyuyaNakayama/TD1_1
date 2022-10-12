@@ -41,7 +41,7 @@ void CollisionManager::CheckAllCollisions(Player* player, WallManager* wallManag
 		Collider* colliderB = *itrB;
 		if (CheckBoxCollisionPair(colliderA, colliderB))
 		{
-			colliderA->OnCollision();
+			if (colliderB->GetCollisionAttribute()!=CollisionAttribute::Goal) { colliderA->OnCollision(); }
 			colliderB->OnCollision();
 		}
 	}

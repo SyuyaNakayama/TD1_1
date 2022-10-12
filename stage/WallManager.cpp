@@ -4,7 +4,7 @@ void WallManager::Initialize()
 {
 	goal_ = std::make_unique<Goal>();
 	goal_->Initialize();
-	SetStage(7);
+	SetStage(1);
 }
 
 void WallManager::AllDraw(ViewProjection viewProjection)
@@ -107,7 +107,33 @@ void WallManager::SetStage(UINT32 stage)
 		walls_[19].Initialize({ 370.0f,-350.0f }, { 50.0f,30.0f });
 		break;
 	case 8:
-		walls_.resize(11);
+		walls_.resize(26);
+		walls_[0].Initialize({ -30.0f,-280.0f }, { 10.0f,300.0f });
+		walls_[1].Initialize({ 590.0f,-280.0f }, { 10.0f,300.0f });
+		walls_[2].Initialize({ 280.0f,30.0f }, { 320.0f,10.0f });
+		walls_[3].Initialize({ 280.0f,-590.0f }, { 320.0f,10.0f });
+		walls_[4].Initialize({ 30.0f,-280.0f }, { 10.0f,240.0f });
+		walls_[5].Initialize({ 530.0f,-260.0f }, { 10.0f,220.0f });
+		walls_[6].Initialize({ 280.0f,-30.0f }, { 260.0f,10.0f });
+		walls_[7].Initialize({ 280.0f,-530.0f }, { 260.0f,10.0f });
+		walls_[8].Initialize({ 90.0f,-240.0f }, { 10.0f,140.0f });
+		walls_[9].Initialize({ 90.0f,-440.0f }, { 10.0f,20.0f });
+		walls_[10].Initialize({ 470.0f,-280.0f }, { 10.0f,180.0f });
+		walls_[11].Initialize({ 280.0f,-90.0f }, { 200.0f,10.0f });
+		walls_[12].Initialize({ 280.0f,-470.0f }, { 200.0f,10.0f });
+		walls_[13].Initialize({ 150.0f,-280.0f }, { 10.0f,120.0f });
+		walls_[14].Initialize({ 410.0f,-280.0f }, { 10.0f,120.0f });
+		walls_[15].Initialize({ 190.0f,-150.0f }, { 50.0f,10.0f });
+		walls_[16].Initialize({ 350.0f,-150.0f }, { 70.0f,10.0f });
+		walls_[17].Initialize({ 280.0f,-410.0f }, { 140.0f,10.0f });
+		walls_[18].Initialize({ 210.0f,-240.0f }, { 10.0f,20.0f });
+		walls_[19].Initialize({ 210.0f,-320.0f }, { 10.0f,20.0f });
+		walls_[20].Initialize({ 350.0f,-280.0f }, { 10.0f,60.0f });
+		walls_[21].Initialize({ 280.0f,-210.0f }, { 80.0f,10.0f });
+		walls_[22].Initialize({ 280.0f,-350.0f }, { 80.0f,10.0f });
+		walls_[23].Initialize({ 250.0f,-280.0f }, { 10.0f,20.0f });
+		walls_[24].Initialize({ 280.0f,-250.0f }, { 40.0f,10.0f });
+		walls_[25].Initialize({ 280.0f,-310.0f }, { 40.0f,10.0f });
 		break;
 	}
 	goal_->SetGoal(stage);
