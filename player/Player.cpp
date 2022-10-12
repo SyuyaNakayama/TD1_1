@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <DirectXMath.h>
 #include "MathUtility.h"
+#include "GameScene.h"
 
 using namespace DirectX;
 
@@ -27,7 +28,7 @@ void Player::Rotate()
 	sprite_->SetRotation(worldTransform_.rotation_.y);
 }
 
-void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera)
+void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
 	model_ = Model::Create();
 	input_ = Input::GetInstance();
@@ -38,6 +39,7 @@ void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamer
 	mapCamera_ = mapCamera;
 	worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
 	worldTransform_.Initialize();
+	stage_ = stage;
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
 }
@@ -69,7 +71,7 @@ void Player::OnCollision()
 	worldTransform_.translation_ = {};
 	worldTransform_.Update();
 	viewProjection_->eye = { 0,10.0f,-20.0f };
-	viewProjection_->target = { 0,0,0 };
+	viewProjection_->target = {};
 	mapCamera_->eye = { 0,4000.0f,0 };;
 	mapCamera_->target = { 0.01f,0,0 };
 }

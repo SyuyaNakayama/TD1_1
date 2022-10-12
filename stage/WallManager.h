@@ -5,7 +5,7 @@
 #include "Goal.h"
 #include <memory>
 
-class WallManager :Collider
+class WallManager
 {
 private:
 	std::vector<Wall> walls_;
@@ -18,8 +18,4 @@ public:
 	std::vector<Wall> GetWalls() { return walls_; }
 	void SetStage(UINT32 stage);
 	Goal* GetGoal() { return goal_.get(); }
-
-	void OnCollision() {};
-	const Vector3 GetWorldPosition() { return {}; }
-	const Vector3 GetRadius() { return {}; }
 };

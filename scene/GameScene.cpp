@@ -16,7 +16,6 @@ void GameScene::Initialize() {
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameover.png"), 7, 8);
-
 	uiTexture_ = TextureManager::Load("white1x1.png");
 	uiSprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
 	uiSprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
@@ -26,19 +25,20 @@ void GameScene::Initialize() {
 	viewProjection_.aspectRatio = 3.0f / 2.0f;
 	viewProjection_.Initialize();
 	// マップカメラの初期化
-	mapCamera_.eye = { 0,4000.0f,0 };
-	mapCamera_.target.x = 0.01f;
-	mapCamera_.aspectRatio = 1.0f;
-	mapCamera_.fovAngleY = 3.0f * PI / 180.0f;
+	mapCamera_.eye = { 200.0f,4000.0f, -200.0f };
+	mapCamera_.target = { 200.0f,0, -200.0f };
+	//mapCamera_.aspectRatio = 1.0f;
+	mapCamera_.fovAngleY = 7.5f * PI / 180.0f;
 	mapCamera_.farZ = 4500.0f;
 	mapCamera_.up = { 0,0,1 };
 	mapCamera_.Initialize();
 	// プレイヤーの初期化
-	player_.Initialize(&viewProjection_, &mapCamera_);
+	player_.Initialize(&viewProjection_, &mapCamera_, &stage_);
 	// 壁の初期化
 	wallManager_.Initialize();
 	// フェードマネージャーの初期化
 	fadeManager_.Initialize(&scene_);
+
 }
 
 void GameScene::Update()
@@ -52,7 +52,7 @@ void GameScene::Update()
 		break;
 	case Play:
 		player_.Update();
-		collisionManager_.CheckAllCollisions(&player_, &wallManager_);
+		if (input_->PushKey(DIK_SPACE)) { collisionManager_.CheckAllCollisions(&player_, &wallManager_); }
 		debugCamera_->Update();
 
 		if (wallManager_.GetGoal()->IsGoal())
@@ -60,7 +60,6 @@ void GameScene::Update()
 			wallManager_.SetStage(++stage_);
 			player_.LifeInit();
 		}
-
 		break;
 	case Clear:
 		break;
@@ -121,11 +120,12 @@ void GameScene::Draw() {
 		/// <summary>
 		/// ここに3Dオブジェクトの描画処理を追加できる
 		/// </summary>
-		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
-		wallManager_.AllDraw(viewProjection_);
-		player_.Draw();
+		//dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
+		//wallManager_.AllDraw(viewProjection_);
+		//player_.Draw();
 
-		dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
+		dxCommon_->SetViewport({}, { WinApp::kWindowWidth,WinApp::kWindowHeight }); // ビューポート切り替え
+		//dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
 		wallManager_.AllDraw(mapCamera_);
 		player_.Draw(mapCamera_);
 		// 3Dオブジェクト描画後処理

@@ -55,7 +55,7 @@ private: // メンバ変数
 	Scene scene_ = Scene::Play;
 	Player player_;
 	WallManager wallManager_;
-	UINT32 stage_ = 1;
+	uint32_t stage_ = 1;
 	Fade fadeManager_;
 	AnimationManager animationManager_;
 };

@@ -24,6 +24,27 @@ void Goal::SetGoal(int stage)
 	case 1:
 		worldTransform_.translation_ = { 0,Y_POS,160.0f };
 		break;
+	case 2:
+		worldTransform_.translation_ = { 100.0f,Y_POS,-20.0f };
+		break;
+	case 3:
+		worldTransform_.translation_ = { 200.0f,Y_POS,200.0f };
+		break;
+	case 4:
+		worldTransform_.translation_ = { 0.0f,Y_POS,360.0f };
+		break;
+	case 5:
+		worldTransform_.translation_ = { 240.0f,Y_POS,-240.0f };
+		break;
+	case 6:
+		worldTransform_.translation_ = { -100.0f,Y_POS,120.0f };
+		break;
+	case 7:
+		worldTransform_.translation_ = { 400.0f,Y_POS,-300.0f };
+		break;
+	case 8:
+		worldTransform_.translation_ = { 0.0f,Y_POS,0.0f };
+		break;
 	}
 	worldTransform_.Update();
 }

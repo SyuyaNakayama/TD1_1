@@ -10,7 +10,7 @@
 class Player :public Collider
 {
 private:
-	WorldTransform worldTransform_{};
+	WorldTransform worldTransform_;
 	Input* input_ = nullptr;
 	Model* model_ = nullptr;
 	const float MOVE_SPD = 1.0f;
@@ -21,11 +21,12 @@ private:
 	ViewProjection* mapCamera_ = nullptr;
 	Sprite* sprite_ = nullptr;
 	uint32_t texture_ = 0, mapIconTexture_ = 0;
+	uint32_t* stage_;
 
 	void Move();
 	void Rotate();
 public:
-	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera);
+	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera,uint32_t* stage);
 	void Update();
 	void SpriteDraw();
 	void Draw();
