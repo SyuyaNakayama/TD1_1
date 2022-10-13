@@ -32,7 +32,7 @@ void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamer
 {
 	model_ = Model::CreateFromOBJ("player");
 	input_ = Input::GetInstance();
-	mapIconTexture_ = TextureManager::Load("playerMapIcon.png");
+	mapIconTexture_ = TextureManager::Load("ui/playerMapIcon.png");
 	sprite_ = Sprite::Create(mapIconTexture_, { 1180,100 }, { 1,1,1,1 }, { 0.5f,0.75f });
 	sprite_->SetSize({ 12,24 });
 	viewProjection_ = viewProjection;

@@ -18,6 +18,7 @@
 #include "enum.h"
 #include "animationManager/AnimationManager.h"
 #include "uiDrawer/UIDrawer.h"
+#include "skydome/Skydome.h"
 
 /// <summary>
 /// ゲームシーン
@@ -58,4 +59,5 @@ private: // メンバ変数
 	Fade fadeManager_;
 	AnimationManager animationManager_;
 	UIDrawer uiDrawer_;
+	Skydome background_;
 };

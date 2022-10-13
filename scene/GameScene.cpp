@@ -22,12 +22,14 @@ void GameScene::Initialize() {
 	viewProjection_.eye.y = 10.0f;
 	viewProjection_.aspectRatio = 3.0f / 2.0f;
 	viewProjection_.Initialize();
+	viewProjection_.farZ = 6000.0f;
+	viewProjection_.UpdateMatrix();
 	// マップカメラの初期化
 	mapCamera_.eye = { 0,2000.0f,0 };
 	mapCamera_.target = { 0,0,0 };
 	mapCamera_.aspectRatio = 1.0f;
 	mapCamera_.fovAngleY = 3.0f * PI / 180.0f;
-	mapCamera_.farZ = 2500.0f;
+	mapCamera_.farZ = 6000.0f;
 	mapCamera_.up = { 0,0,1 };
 	mapCamera_.Initialize();
 	// プレイヤーの初期化
@@ -38,6 +40,7 @@ void GameScene::Initialize() {
 	fadeManager_.Initialize(&scene_);
 	// UIドローワーの初期化
 	uiDrawer_.Initialize(&player_);
+	background_.Initialize();
 }
 
 void GameScene::Update()
@@ -54,7 +57,7 @@ void GameScene::Update()
 		debugCamera_->Update();
 		if (input_->PushKey(DIK_SPACE) && !fadeManager_.IsFade())
 		{
-			collisionManager_.CheckAllCollisions(&player_, &wallManager_);
+			//collisionManager_.CheckAllCollisions(&player_, &wallManager_);
 		}
 
 		if (wallManager_.GetGoal()->IsGoal())
@@ -130,9 +133,11 @@ void GameScene::Draw() {
 		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
 		wallManager_.AllDraw(viewProjection_);
 		player_.Draw();
+		background_.Draw(viewProjection_);
 
 		dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
 		wallManager_.AllDraw(mapCamera_);
+		background_.Draw(mapCamera_);
 		// 3Dオブジェクト描画後処理
 		Model::PostDraw();
 	}
