@@ -25,16 +25,12 @@ void Player::Rotate()
 
 	worldTransform_.rotation_.y += ROT_SPD;
 	if (worldTransform_.rotation_.y >= XM_2PI) { worldTransform_.rotation_.y = 0; }
-	sprite_->SetRotation(worldTransform_.rotation_.y);
 }
 
 void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
 	model_ = Model::CreateFromOBJ("player");
 	input_ = Input::GetInstance();
-	mapIconTexture_ = TextureManager::Load("ui/playerMapIcon.png");
-	sprite_ = Sprite::Create(mapIconTexture_, { 1180,100 }, { 1,1,1,1 }, { 0.5f,0.75f });
-	sprite_->SetSize({ 12,24 });
 	viewProjection_ = viewProjection;
 	mapCamera_ = mapCamera;
 	worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
@@ -49,11 +45,6 @@ void Player::Update()
 	Rotate();
 	Move();
 	worldTransform_.Update();
-}
-
-void Player::SpriteDraw()
-{
-	sprite_->Draw();
 }
 
 void Player::Draw()

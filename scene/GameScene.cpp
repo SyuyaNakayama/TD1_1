@@ -22,14 +22,14 @@ void GameScene::Initialize() {
 	viewProjection_.eye.y = 10.0f;
 	viewProjection_.aspectRatio = 3.0f / 2.0f;
 	viewProjection_.Initialize();
-	viewProjection_.farZ = 6000.0f;
+	viewProjection_.farZ = 4000.0f;
 	viewProjection_.UpdateMatrix();
 	// マップカメラの初期化
 	mapCamera_.eye = { 0,2000.0f,0 };
 	mapCamera_.target = { 0,0,0 };
 	mapCamera_.aspectRatio = 1.0f;
 	mapCamera_.fovAngleY = 3.0f * PI / 180.0f;
-	mapCamera_.farZ = 6000.0f;
+	mapCamera_.farZ = 5000.0f;
 	mapCamera_.up = { 0,0,1 };
 	mapCamera_.Initialize();
 	// プレイヤーの初期化
@@ -70,6 +70,7 @@ void GameScene::Update()
 			}
 		}
 
+		uiDrawer_.Update();
 		if (player_.GetLife() <= 0) { fadeManager_.ChangeScene(GameOver); }
 		break;
 	case Clear:
@@ -153,7 +154,6 @@ void GameScene::Draw() {
 	dxCommon_->SetViewport({ 0,0 }, { 1280.0f,720.0f });
 	if (scene_ == Play)
 	{
-		player_.SpriteDraw();
 		uiDrawer_.Draw();
 	}
 	fadeManager_.Draw();

@@ -19,8 +19,6 @@ private:
 	int life_ = MAX_LIFE;
 	ViewProjection* viewProjection_ = nullptr;
 	ViewProjection* mapCamera_ = nullptr;
-	Sprite* sprite_ = nullptr;
-	uint32_t texture_ = 0, mapIconTexture_ = 0;
 	uint32_t* stage_;
 
 	void Move();
@@ -28,12 +26,12 @@ private:
 public:
 	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage);
 	void Update();
-	void SpriteDraw();
 	void Draw();
 
 	void Init();
 	int GetLife() { return life_; }
 	Vector3 GetPosition() { return worldTransform_.translation_; }
+	float GetRotateY() { return worldTransform_.rotation_.y; }
 
 	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
