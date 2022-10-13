@@ -17,9 +17,6 @@ void GameScene::Initialize() {
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameover.png"), 7, 8);
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameclear.png"), 4, 8);
-	uiTexture_ = TextureManager::Load("white1x1.png");
-	uiSprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
-	uiSprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
 	// ビュープロジェクションの初期化
 	viewProjection_.eye.z = -20.0f;
 	viewProjection_.eye.y = 10.0f;
@@ -39,6 +36,8 @@ void GameScene::Initialize() {
 	wallManager_.Initialize();
 	// フェードマネージャーの初期化
 	fadeManager_.Initialize(&scene_);
+	// UIドローワーの初期化
+	uiDrawer_.Initialize();
 }
 
 void GameScene::Update()
@@ -107,7 +106,6 @@ void GameScene::Draw() {
 	case HowToPlay:
 		break;
 	case Play:
-		uiSprite_->Draw();
 		break;
 	case Clear:
 		animationManager_.Draw(1);
@@ -151,6 +149,8 @@ void GameScene::Draw() {
 	if (scene_ == Play)
 	{
 		player_.SpriteDraw();
+		//uiSprite_->Draw();
+		uiDrawer_.Draw();
 	}
 	fadeManager_.Draw();
 

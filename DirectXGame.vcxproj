@@ -110,6 +110,7 @@
     <ClCompile Include="stage\Wall.cpp" />
     <ClCompile Include="stage\WallManager.cpp" />
     <ClCompile Include="timer\Timer.cpp" />
+    <ClCompile Include="uiDrawer\UIDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="stage\Wall.h" />
     <ClInclude Include="stage\WallManager.h" />
     <ClInclude Include="timer\Timer.h" />
+    <ClInclude Include="uiDrawer\UIDrawer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">

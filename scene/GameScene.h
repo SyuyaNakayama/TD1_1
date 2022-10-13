@@ -17,6 +17,7 @@
 #include "Fade/Fade.h"
 #include "enum.h"
 #include "animationManager/AnimationManager.h"
+#include "uiDrawer/UIDrawer.h"
 
 /// <summary>
 /// ゲームシーン
@@ -45,10 +46,8 @@ private: // メンバ変数
 	DebugText* debugText_ = nullptr;
 	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
-	Sprite* uiSprite_ = nullptr;
 	std::vector<Sprite*> sceneSprite_;
 	std::vector<Sprite*> gameoverSprite_;
-	uint32_t uiTexture_ = 0;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
 	CollisionManager collisionManager_;
@@ -58,4 +57,5 @@ private: // メンバ変数
 	uint32_t stage_ = 1;
 	Fade fadeManager_;
 	AnimationManager animationManager_;
+	UIDrawer uiDrawer_;
 };
