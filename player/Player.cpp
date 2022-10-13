@@ -30,7 +30,7 @@ void Player::Rotate()
 
 void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("player");
 	input_ = Input::GetInstance();
 	mapIconTexture_ = TextureManager::Load("playerMapIcon.png");
 	sprite_ = Sprite::Create(mapIconTexture_, { 1180,100 }, { 1,1,1,1 }, { 0.5f,0.75f });

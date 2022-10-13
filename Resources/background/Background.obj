@@ -1,6 +1,6 @@
 # Blender 3.1.2
 # www.blender.org
-mtllib Background1.mtl
+mtllib Background.mtl
 o 球
 v 0.000000 1.961571 -0.390181
 v 0.000000 1.847759 -0.765367

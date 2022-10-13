@@ -37,7 +37,7 @@ void GameScene::Initialize() {
 	// フェードマネージャーの初期化
 	fadeManager_.Initialize(&scene_);
 	// UIドローワーの初期化
-	uiDrawer_.Initialize();
+	uiDrawer_.Initialize(&player_);
 }
 
 void GameScene::Update()
@@ -149,7 +149,6 @@ void GameScene::Draw() {
 	if (scene_ == Play)
 	{
 		player_.SpriteDraw();
-		//uiSprite_->Draw();
 		uiDrawer_.Draw();
 	}
 	fadeManager_.Draw();
