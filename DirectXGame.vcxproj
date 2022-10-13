@@ -162,6 +162,8 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
     <None Include="Resources\shaders\Obj.hlsli" />
     <None Include="Resources\shaders\Primitive.hlsli" />
     <None Include="Resources\shaders\Shape.hlsli">
