@@ -16,6 +16,7 @@ void GameScene::Initialize() {
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameover.png"), 7, 8);
+	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameclear.png"), 4, 8);
 	uiTexture_ = TextureManager::Load("white1x1.png");
 	uiSprite_ = Sprite::Create(uiTexture_, { 1080.0f,200.0f }, { 0,0,0,1 });
 	uiSprite_->SetSize({ 200,WinApp::kWindowHeight - 200 });
@@ -42,7 +43,7 @@ void GameScene::Initialize() {
 
 void GameScene::Update()
 {
-	if (input_->TriggerKey(DIK_0)) { fadeManager_.ChangeScene(GameOver); }
+	if (input_->TriggerKey(DIK_0)) { fadeManager_.ChangeScene(Clear); }
 	switch (scene_)
 	{
 	case Title:
@@ -70,6 +71,7 @@ void GameScene::Update()
 		if (player_.GetLife() <= 0) { fadeManager_.ChangeScene(GameOver); }
 		break;
 	case Clear:
+		animationManager_.Update(1);
 		break;
 	case GameOver:
 		animationManager_.Update(0);
@@ -108,6 +110,7 @@ void GameScene::Draw() {
 		uiSprite_->Draw();
 		break;
 	case Clear:
+		animationManager_.Draw(1);
 		break;
 	case GameOver:
 		animationManager_.Draw(0);
