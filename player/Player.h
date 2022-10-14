@@ -20,18 +20,20 @@ private:
 	ViewProjection* viewProjection_ = nullptr;
 	ViewProjection* mapCamera_ = nullptr;
 	uint32_t* stage_;
+	bool isDead_ = false;
 
 	void Move();
 	void Rotate();
 public:
 	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage);
+	void LifeInit(){ life_ = MAX_LIFE; }
+	void InitPosAndCamera();
 	void Update();
 	void Draw();
 
-	void Init();
 	int GetLife() { return life_; }
-	Vector3 GetPosition() { return worldTransform_.translation_; }
 	float GetRotateY() { return worldTransform_.rotation_.y; }
+	bool IsDead() { return isDead_; }
 
 	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }

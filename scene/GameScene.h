@@ -45,17 +45,15 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	DebugText* debugText_ = nullptr;
-	DebugCamera* debugCamera_ = nullptr;
 	Model* model_;
 	std::vector<Sprite*> sceneSprite_;
-	std::vector<Sprite*> gameoverSprite_;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
+	uint32_t stage_ = 1;
 	CollisionManager collisionManager_;
 	Scene scene_ = Scene::Play;
 	Player player_;
 	WallManager wallManager_;
-	uint32_t stage_ = 1;
 	Fade fadeManager_;
 	AnimationManager animationManager_;
 	UIDrawer uiDrawer_;

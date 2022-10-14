@@ -10,6 +10,6 @@ private:
 	Player* player_ = nullptr;
 public:
 	void Initialize(Player* player);
-	void Update();
+	void Update(Vector3 goalPosition);
 	void Draw();
 };

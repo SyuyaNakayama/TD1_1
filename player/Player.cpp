@@ -35,6 +35,7 @@ void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamer
 	mapCamera_ = mapCamera;
 	worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
 	worldTransform_.Initialize();
+	worldTransform_.Update();
 	stage_ = stage;
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
@@ -55,11 +56,11 @@ void Player::Draw()
 void Player::OnCollision()
 {
 	life_--;
+	isDead_ = true;
 }
 
-void Player::Init()
+void Player::InitPosAndCamera()
 {
-	life_ = MAX_LIFE;
 	worldTransform_.translation_ = {};
 	worldTransform_.Update();
 	viewProjection_->eye = { 0,10.0f,-20.0f };
@@ -68,4 +69,5 @@ void Player::Init()
 	mapCamera_->eye = { 0,2000.0f,0 };
 	mapCamera_->target = {};
 	mapCamera_->UpdateMatrix();
+	isDead_ = false;
 }
