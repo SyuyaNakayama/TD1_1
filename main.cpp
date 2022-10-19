@@ -46,6 +46,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();
 
+	// パーティクル静的初期化
+	ParticleManager::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
 #pragma endregion
 
 	// ゲームシーンの初期化

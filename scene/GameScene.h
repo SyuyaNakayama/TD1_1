@@ -19,6 +19,7 @@
 #include "animationManager/AnimationManager.h"
 #include "uiDrawer/UIDrawer.h"
 #include "skydome/Skydome.h"
+#include "ParticleManager/ParticleManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -58,4 +59,5 @@ private: // メンバ変数
 	AnimationManager animationManager_;
 	UIDrawer uiDrawer_;
 	Skydome background_;
+	ParticleManager* particleManager_;
 };

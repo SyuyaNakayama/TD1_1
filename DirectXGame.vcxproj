@@ -104,6 +104,7 @@
     <ClCompile Include="Fade\Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\Vector3.cpp" />
+    <ClCompile Include="ParticleManager\ParticleManager.cpp" />
     <ClCompile Include="player\Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="skydome\Skydome.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="math\Vector2.h" />
     <ClInclude Include="math\Vector3.h" />
     <ClInclude Include="math\Vector4.h" />
+    <ClInclude Include="ParticleManager\ParticleManager.h" />
     <ClInclude Include="player\Player.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="skydome\Skydome.h" />

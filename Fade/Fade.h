@@ -23,6 +23,8 @@ public:
 	void FadeScene();
 	void ChangeScene(Scene nextScene);
 
+	float GetAlpha() { return alpha_; }
+
 	bool IsChange() { return isChange_; }
 	bool IsFade() { return isFade_; }
 };

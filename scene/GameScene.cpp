@@ -41,6 +41,7 @@ void GameScene::Initialize() {
 	// UIドローワーの初期化
 	uiDrawer_.Initialize(&player_);
 	background_.Initialize();
+	particleManager_ = ParticleManager::Create();
 }
 
 void GameScene::Update()
@@ -96,14 +97,18 @@ void GameScene::Update()
 				// ゲームオーバー
 				fadeManager_.ChangeScene(GameOver);
 			}
+
+			if (fadeManager_.GetAlpha() <= 0.25) { particleManager_->Add(60, 1.0f, 0.0f); }
 		}
 
 		uiDrawer_.Update(wallManager_.GetGoal()->GetWorldPosition());
+
+		particleManager_->Update();
 		break;
 	case Clear:
 		animationManager_.Update(1);
-		if (input_->PushKey(DIK_SPACE)) 
-		{ 
+		if (input_->PushKey(DIK_SPACE))
+		{
 			fadeManager_.ChangeScene(Title);
 			player_.LifeInit();
 			player_.InitPosAndCamera();
@@ -172,7 +177,7 @@ void GameScene::Draw() {
 		/// </summary>
 		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
 		wallManager_.AllDraw(viewProjection_);
-		player_.Draw();
+		if (!player_.IsDead()) { player_.Draw(); }
 		background_.Draw(viewProjection_);
 
 		dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
@@ -180,6 +185,10 @@ void GameScene::Draw() {
 		background_.Draw(mapCamera_);
 		// 3Dオブジェクト描画後処理
 		Model::PostDraw();
+		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
+		ParticleManager::PreDraw(commandList);
+		particleManager_->Draw();
+		ParticleManager::PostDraw();
 	}
 #pragma endregion
 
