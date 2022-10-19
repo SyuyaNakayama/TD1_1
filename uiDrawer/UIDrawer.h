@@ -6,7 +6,7 @@
 class UIDrawer
 {
 private:
-	std::vector<Sprite*> sprites_;
+	std::vector<Sprite*> sprites_,playerLife_,stages_;
 	Player* player_ = nullptr;
 public:
 	void Initialize(Player* player);

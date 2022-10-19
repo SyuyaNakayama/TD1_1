@@ -170,8 +170,8 @@ void GameScene::Draw() {
 #pragma region 3Dオブジェクト描画
 	if (scene_ == Play)
 	{
-		// 3Dオブジェクト描画前処理
 		Model::PreDraw(commandList);
+		// 3Dオブジェクト描画前処理
 		/// <summary>
 		/// ここに3Dオブジェクトの描画処理を追加できる
 		/// </summary>
