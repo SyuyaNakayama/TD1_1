@@ -106,6 +106,7 @@
     <ClCompile Include="math\Vector3.cpp" />
     <ClCompile Include="player\Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="skydome\Skydome.cpp" />
     <ClCompile Include="stage\Goal.cpp" />
     <ClCompile Include="stage\Wall.cpp" />
     <ClCompile Include="stage\WallManager.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="math\Vector4.h" />
     <ClInclude Include="player\Player.h" />
     <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="skydome\Skydome.h" />
     <ClInclude Include="stage\Goal.h" />
     <ClInclude Include="stage\Wall.h" />
     <ClInclude Include="stage\WallManager.h" />
@@ -164,8 +166,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
     <None Include="Resources\shaders\Obj.hlsli" />
     <None Include="Resources\shaders\Primitive.hlsli" />
     <None Include="Resources\shaders\Shape.hlsli">

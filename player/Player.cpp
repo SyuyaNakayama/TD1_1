@@ -25,20 +25,17 @@ void Player::Rotate()
 
 	worldTransform_.rotation_.y += ROT_SPD;
 	if (worldTransform_.rotation_.y >= XM_2PI) { worldTransform_.rotation_.y = 0; }
-	sprite_->SetRotation(worldTransform_.rotation_.y);
 }
 
 void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("player");
 	input_ = Input::GetInstance();
-	mapIconTexture_ = TextureManager::Load("playerMapIcon.png");
-	sprite_ = Sprite::Create(mapIconTexture_, { 1180,100 }, { 1,1,1,1 }, { 0.5f,0.75f });
-	sprite_->SetSize({ 12,24 });
 	viewProjection_ = viewProjection;
 	mapCamera_ = mapCamera;
 	worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
 	worldTransform_.Initialize();
+	worldTransform_.Update();
 	stage_ = stage;
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
@@ -51,11 +48,6 @@ void Player::Update()
 	worldTransform_.Update();
 }
 
-void Player::SpriteDraw()
-{
-	sprite_->Draw();
-}
-
 void Player::Draw()
 {
 	model_->Draw(worldTransform_, *viewProjection_);
@@ -64,11 +56,11 @@ void Player::Draw()
 void Player::OnCollision()
 {
 	life_--;
+	isDead_ = true;
 }
 
-void Player::Init()
+void Player::InitPosAndCamera()
 {
-	life_ = MAX_LIFE;
 	worldTransform_.translation_ = {};
 	worldTransform_.Update();
 	viewProjection_->eye = { 0,10.0f,-20.0f };
@@ -77,4 +69,5 @@ void Player::Init()
 	mapCamera_->eye = { 0,2000.0f,0 };
 	mapCamera_->target = {};
 	mapCamera_->UpdateMatrix();
+	isDead_ = false;
 }

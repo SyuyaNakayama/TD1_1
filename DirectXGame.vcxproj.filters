@@ -105,6 +105,9 @@
     <ClCompile Include="uiDrawer\UIDrawer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="skydome\Skydome.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -230,6 +233,9 @@
     <ClInclude Include="enum.h">
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
+    <ClInclude Include="skydome\Skydome.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -278,12 +284,6 @@
     </None>
     <None Include="Resources\shaders\Terrain.hlsli">
       <Filter>シェーダー ファイル</Filter>
-    </None>
-    <None Include=".gitattributes">
-      <Filter>ソース ファイル</Filter>
-    </None>
-    <None Include=".gitignore">
-      <Filter>ソース ファイル</Filter>
     </None>
   </ItemGroup>
 </Project>
