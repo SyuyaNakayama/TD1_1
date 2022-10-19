@@ -2,6 +2,10 @@
 #include "TextureManager.h"
 #include "WinApp.h"
 
+/// <summary>
+/// ‰Šú‰»
+/// </summary>
+/// <param name="nowScene"></param>
 void Fade::Initialize(Scene* nowScene)
 {
 	texture_ = TextureManager::Load("white1x1.png");
