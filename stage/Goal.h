@@ -22,4 +22,7 @@ public:
 	void OnCollision() { isGoal = true; }
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
 	const Vector3 GetRadius() { return worldTransform_.scale_; }
-};
+}; 
+//uint32_t Goal_ = 0;
+//Model* modelGoal_ = nullptr;
+//WorldTransform worldTransformGoal_;
