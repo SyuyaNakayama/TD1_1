@@ -48,76 +48,11 @@ void GameScene::Initialize() {
 
 void GameScene::Update()
 {
-	switch (scene_)
-	{
-	case Title:
-		animationManager_.Update(0);
-		break;
-	case Play:
-		if (!fadeManager_.IsFade()) { player_.Update(); }
-
-		if (input_->PushKey(DIK_SPACE) && !fadeManager_.IsFade())
-		{
-			// 当たり判定
-			collisionManager_.CheckAllCollisions(&player_, &wallManager_);
-		}
-
-		// ゴール
-		if (wallManager_.GetGoal()->IsGoal())
-		{
-			if (stage_ <= 7)
-			{
-				// 次のステージ
-				fadeManager_.FadeScene();
-				if (fadeManager_.IsChange())
-				{
-					wallManager_.SetStage(++stage_);
-					player_.LifeInit();
-					player_.InitPosAndCamera();
-				}
-			}
-			else
-			{
-				fadeManager_.ChangeScene(Clear);
-			}
-		}
-		// ミス
-		if (player_.IsDead())
-		{
-			if (player_.GetLife() > 0)
-			{
-				// リトライ
-				fadeManager_.FadeScene();
-				if (fadeManager_.IsChange()) { player_.InitPosAndCamera(); }
-			}
-			else
-			{
-				// ゲームオーバー
-				fadeManager_.ChangeScene(GameOver);
-			}
-
-			if (fadeManager_.GetAlpha() <= 0.25) { particleManager_->Add(60, 1.0f, 0.0f); }
-		}
-
-		uiDrawer_.Update(wallManager_.GetGoal()->GetWorldPosition());
-
-		particleManager_->Update();
-		break;
-	case Clear:
-
-		animationManager_.Update(1);
-		break;
-	case GameOver:
-
-		animationManager_.Update(2);
-		break;
-	}
-
-	Update_Sound();
-	//Update_Play();
+	Update_Animation();
 	Update_SceneChange();
-
 	fadeManager_.Update();
+	Update_Sound();
+	Update_Play();
 }
 
 void GameScene::Draw() {
@@ -235,32 +170,95 @@ void GameScene::Update_SceneChange()
 
 void GameScene::Update_Sound()
 {
+	if (!fadeManager_.IsChange()) { return; }
 	switch (scene_)
 	{
+	case Title:
+		soundManager_->StopBGM(SoundManager::Clear);
+		soundManager_->PlayBGM(SoundManager::Title);
+		break;
 	case Play:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Title);
-			soundManager_->PlayBGM(SoundManager::Play);
-		}
+		soundManager_->StopBGM(SoundManager::GameOver);
+		soundManager_->StopBGM(SoundManager::Title);
+		soundManager_->PlayBGM(SoundManager::Play);
 		break;
 	case Clear:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Play);
-			soundManager_->PlayBGM(SoundManager::Clear);
-		}
+		soundManager_->StopBGM(SoundManager::Play);
+		soundManager_->PlayBGM(SoundManager::Clear);
 		break;
 	case GameOver:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Play);
-			soundManager_->PlayBGM(SoundManager::GameOver);
-		}
+		soundManager_->StopBGM(SoundManager::Play);
+		soundManager_->PlayBGM(SoundManager::GameOver);
 		break;
 	}
 }
 
 void GameScene::Update_Play()
 {
+	if (scene_ != Play) { return; }
+
+	if (!fadeManager_.IsFade()) { player_.Update(); }
+
+	if (input_->PushKey(DIK_SPACE) && !fadeManager_.IsFade())
+	{
+		// 当たり判定
+		collisionManager_.CheckAllCollisions(&player_, &wallManager_);
+	}
+
+	// ゴール
+	if (wallManager_.GetGoal()->IsGoal())
+	{
+		if (stage_ <= 7)
+		{
+			// 次のステージ
+			fadeManager_.FadeScene();
+			if (fadeManager_.IsChange())
+			{
+				wallManager_.SetStage(++stage_);
+				player_.LifeInit();
+				player_.InitPosAndCamera();
+			}
+		}
+		else
+		{
+			fadeManager_.ChangeScene(Clear);
+		}
+	}
+	// ミス
+	if (player_.IsDead())
+	{
+		if (player_.GetLife() > 0)
+		{
+			// リトライ
+			fadeManager_.FadeScene();
+			if (fadeManager_.IsChange()) { player_.InitPosAndCamera(); }
+		}
+		else
+		{
+			// ゲームオーバー
+			fadeManager_.ChangeScene(GameOver);
+		}
+
+		if (fadeManager_.GetAlpha() <= 0.25) { particleManager_->Add(60, 1.0f, 0.0f); }
+	}
+
+	uiDrawer_.Update(wallManager_.GetGoal()->GetWorldPosition());
+
+	particleManager_->Update();
+}
+
+void GameScene::Update_Animation()
+{
+	switch (scene_)
+	{
+	case Title:
+		animationManager_.Update(0);
+		break;
+	case Clear:
+		animationManager_.Update(1);
+		break;
+	case GameOver:
+		animationManager_.Update(2);
+		break;
+	}
 }

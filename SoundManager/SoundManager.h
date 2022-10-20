@@ -6,8 +6,9 @@ class SoundManager
 {
 private:
 	Audio* audio_ = nullptr;
-	std::vector<uint32_t>bgm_, se_;
+	std::vector<uint32_t> bgm_, se_;
 	bool isPlay_ = false;
+	std::vector<uint32_t> playHandle_;
 
 	SoundManager() = default;
 	~SoundManager() = default;

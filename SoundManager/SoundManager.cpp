@@ -7,23 +7,24 @@ void SoundManager::Initialize()
 	bgm_.push_back(audio_->LoadWave("sound/GamePlay.mp3"));
 	bgm_.push_back(audio_->LoadWave("sound/GameClear.mp3"));
 	bgm_.push_back(audio_->LoadWave("sound/GameOver.mp3"));
+	playHandle_.resize(bgm_.size());
 	se_.push_back(audio_->LoadWave("sound/PlayerHitSE.mp3"));
 }
 
 void SoundManager::PlayBGM(BGM index)
 {
-	if (audio_->IsPlaying(bgm_[index])) { return; }
-	audio_->PlayWave(bgm_[index], true, 0.8f);
+	if (audio_->IsPlaying(playHandle_[index])) { return; }
+	playHandle_[index] = audio_->PlayWave(bgm_[index], true, 0.8f);
 }
 
 void SoundManager::PlaySE(SE index)
 {
-	audio_->PlayWave(se_[index]);
+	 audio_->PlayWave(se_[index]);
 }
 
 void SoundManager::StopBGM(BGM index)
 {
-	audio_->StopWave(bgm_[index]);
+ 	audio_->StopWave(playHandle_[index]);
 }
 
 SoundManager* SoundManager::GetInstance()

@@ -46,6 +46,7 @@ private: // メンバ変数
 	void Update_SceneChange();
 	void Update_Sound();
 	void Update_Play();
+	void Update_Animation();
 
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -56,7 +57,7 @@ private: // メンバ変数
 	ViewProjection mapCamera_;
 	uint32_t stage_ = 1;
 	CollisionManager collisionManager_;
-	Scene scene_ = Scene::Play;
+	Scene scene_ = Scene::Title;
 	Player player_;
 	WallManager wallManager_;
 	Fade fadeManager_;
