@@ -56,7 +56,7 @@ private: // メンバ変数
 	ViewProjection mapCamera_;
 	uint32_t stage_ = 1;
 	CollisionManager collisionManager_;
-	Scene scene_ = Scene::HowToPlay;
+	Scene scene_ = Scene::Play;
 	Player player_;
 	WallManager wallManager_;
 	Fade fadeManager_;

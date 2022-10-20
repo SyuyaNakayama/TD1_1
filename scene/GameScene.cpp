@@ -52,21 +52,8 @@ void GameScene::Update()
 	{
 	case Title:
 		animationManager_.Update(0);
-		if (input_->PushKey(DIK_SPACE))
-		{
-			fadeManager_.ChangeScene(HowToPlay);
-			sceneSprite_[1]->SetPosition({ 1000.0f,600.0f });
-		}
-		break;
-	case HowToPlay:
-		if (input_->PushKey(DIK_SPACE)) { fadeManager_.ChangeScene(Play); }
 		break;
 	case Play:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Title);
-			soundManager_->PlayBGM(SoundManager::Play);
-		}
 		if (!fadeManager_.IsFade()) { player_.Update(); }
 
 		if (input_->PushKey(DIK_SPACE) && !fadeManager_.IsFade())
@@ -117,39 +104,18 @@ void GameScene::Update()
 		particleManager_->Update();
 		break;
 	case Clear:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Play);
-			soundManager_->PlayBGM(SoundManager::Clear);
-		}
 
 		animationManager_.Update(1);
-		if (input_->PushKey(DIK_SPACE))
-		{
-			fadeManager_.ChangeScene(Title);
-			player_.LifeInit();
-			player_.InitPosAndCamera();
-			wallManager_.SetStage(stage_ = 1);
-		}
 		break;
 	case GameOver:
-		if (fadeManager_.IsChange())
-		{
-			soundManager_->StopBGM(SoundManager::Play);
-			soundManager_->PlayBGM(SoundManager::Clear);
-		}
-		
+
 		animationManager_.Update(2);
-		if (input_->PushKey(DIK_SPACE))
-		{
-			fadeManager_.ChangeScene(Play);
-			player_.LifeInit();
-			player_.InitPosAndCamera();
-			if (stage_ <= 4) { wallManager_.SetStage(stage_ = 1); }
-			else { wallManager_.SetStage(stage_ = 5); }
-		}
 		break;
 	}
+
+	Update_Sound();
+	//Update_Play();
+	Update_SceneChange();
 
 	fadeManager_.Update();
 }
@@ -241,10 +207,58 @@ void GameScene::Draw() {
 
 void GameScene::Update_SceneChange()
 {
+	if (!input_->PushKey(DIK_SPACE)) { return; }
+	switch (scene_)
+	{
+	case Title:
+		fadeManager_.ChangeScene(HowToPlay);
+		sceneSprite_[1]->SetPosition({ 1000.0f,600.0f });
+		break;
+	case HowToPlay:
+		fadeManager_.ChangeScene(Play);
+		break;
+	case Clear:
+		fadeManager_.ChangeScene(Title);
+		player_.LifeInit();
+		player_.InitPosAndCamera();
+		wallManager_.SetStage(stage_ = 1);
+		break;
+	case GameOver:
+		fadeManager_.ChangeScene(Play);
+		player_.LifeInit();
+		player_.InitPosAndCamera();
+		if (stage_ <= 4) { wallManager_.SetStage(stage_ = 1); }
+		else { wallManager_.SetStage(stage_ = 5); }
+		break;
+	}
 }
 
 void GameScene::Update_Sound()
 {
+	switch (scene_)
+	{
+	case Play:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Title);
+			soundManager_->PlayBGM(SoundManager::Play);
+		}
+		break;
+	case Clear:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Play);
+			soundManager_->PlayBGM(SoundManager::Clear);
+		}
+		break;
+	case GameOver:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Play);
+			soundManager_->PlayBGM(SoundManager::GameOver);
+		}
+		break;
+	}
 }
 
 void GameScene::Update_Play()
