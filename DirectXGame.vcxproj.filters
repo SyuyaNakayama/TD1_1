@@ -111,6 +111,9 @@
     <ClCompile Include="ParticleManager\ParticleManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager\SoundManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -224,9 +227,6 @@
     <ClInclude Include="Fade\Fade.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationManager\AnimationManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="timer\Timer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -240,6 +240,12 @@
       <Filter>ヘッダー ファイル\stage</Filter>
     </ClInclude>
     <ClInclude Include="ParticleManager\ParticleManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager\AnimationManager.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager\SoundManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

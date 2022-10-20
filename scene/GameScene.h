@@ -20,6 +20,7 @@
 #include "uiDrawer/UIDrawer.h"
 #include "skydome/Skydome.h"
 #include "ParticleManager/ParticleManager.h"
+#include "SoundManager/SoundManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -44,7 +45,6 @@ public: // メンバ関数
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
-	Audio* audio_ = nullptr;
 	DebugText* debugText_ = nullptr;
 	Model* model_;
 	std::vector<Sprite*> sceneSprite_;
@@ -60,4 +60,5 @@ private: // メンバ変数
 	UIDrawer uiDrawer_;
 	Skydome background_;
 	ParticleManager* particleManager_;
+	SoundManager soundManager_;
 };

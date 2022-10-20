@@ -9,7 +9,6 @@ void GameScene::Initialize() {
 	// 機能の初期化
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
-	audio_ = Audio::GetInstance();
 	debugText_ = DebugText::GetInstance();
 	model_ = Model::Create();
 	// スプライト生成
@@ -43,6 +42,7 @@ void GameScene::Initialize() {
 	uiDrawer_.Initialize(&player_);
 	background_.Initialize();
 	particleManager_ = ParticleManager::Create();
+	soundManager_.Initialize();
 }
 
 void GameScene::Update()
