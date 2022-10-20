@@ -9,7 +9,7 @@ class Goal :public Collider
 {
 	WorldTransform worldTransform_;
 	Model* model_ = nullptr;
-	const float Y_POS = -20.0f;
+	const float Y_POS = -10.0f;
 	const float Y_RAD = fabs(Y_POS) * 2.0f;
 	bool isGoal = 0;
 public:
