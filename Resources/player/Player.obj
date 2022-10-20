@@ -1,6 +1,6 @@
 # Blender v3.1.2 OBJ File: 'Player2.blend'
 # www.blender.org
-mtllib Player2.mtl
+mtllib Player.mtl
 o 球
 v 0.000000 0.980785 0.195090
 v 0.000000 0.923880 0.382683

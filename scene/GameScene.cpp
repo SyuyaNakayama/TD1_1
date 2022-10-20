@@ -43,6 +43,7 @@ void GameScene::Initialize() {
 	background_.Initialize();
 	particleManager_ = ParticleManager::Create();
 	soundManager_.Initialize();
+	soundManager_.PlayBGM(SoundManager::Title);
 }
 
 void GameScene::Update()
@@ -58,7 +59,10 @@ void GameScene::Update()
 		}
 		break;
 	case HowToPlay:
-		if (input_->PushKey(DIK_SPACE)) { fadeManager_.ChangeScene(Play); }
+		if (input_->PushKey(DIK_SPACE)) 
+		{
+			fadeManager_.ChangeScene(Play);
+		}
 		break;
 	case Play:
 		if (!fadeManager_.IsFade()) { player_.Update(); }

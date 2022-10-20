@@ -8,8 +8,10 @@ private:
 	Audio* audio_;
 	std::vector<uint32_t>bgm_, se_;
 public:
+	enum SoundIndex { Title, Play, Clear, GameOver };
+
 	void Initialize();
-	void PlayBGM(size_t index);
-	void PlaySE(size_t index);
-	void StopBGM(size_t index);
+	void PlayBGM(SoundIndex index);
+	void PlaySE(SoundIndex index);
+	void StopBGM(SoundIndex index);
 };
