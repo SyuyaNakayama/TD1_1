@@ -26,7 +26,7 @@ private:
 	void Rotate();
 public:
 	void Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage);
-	void LifeInit(){ life_ = MAX_LIFE; }
+	void LifeInit() { life_ = MAX_LIFE; }
 	void InitPosAndCamera();
 	void Update();
 	void Draw();
@@ -38,5 +38,5 @@ public:
 
 	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
-	const Vector3 GetRadius() { return worldTransform_.scale_; }
+	const Vector3 GetRadius() { return worldTransform_.scale_ - Vector3(0.3f, 0.3f, 0.3f); }
 };

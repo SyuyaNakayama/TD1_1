@@ -1,7 +1,7 @@
 # Blender 3.1.2 MTL File: 'Obstacles.blend'
 # www.blender.org
 
-newmtl 壁1
+newmtl wall01
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 map_Kd  Obstacles2.png
 
-newmtl 壁2
+newmtl wall02
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000

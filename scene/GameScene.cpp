@@ -14,6 +14,7 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
+	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/spaceletter.png"), {}));
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/title.png"), 2, 20);
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameclear.png"), 4, 8);
 	animationManager_.SetSprite(TextureManager::Load("sceneSprite/gameover.png"), 7, 8);
@@ -50,7 +51,11 @@ void GameScene::Update()
 	{
 	case Title:
 		animationManager_.Update(0);
-		if (input_->PushKey(DIK_SPACE)) { fadeManager_.ChangeScene(HowToPlay); }
+		if (input_->PushKey(DIK_SPACE))
+		{
+			fadeManager_.ChangeScene(HowToPlay);
+			sceneSprite_[1]->SetPosition({ 1000.0f,600.0f });
+		}
 		break;
 	case HowToPlay:
 		if (input_->PushKey(DIK_SPACE)) { fadeManager_.ChangeScene(Play); }
@@ -152,14 +157,15 @@ void GameScene::Draw() {
 		break;
 	case HowToPlay:
 		sceneSprite_[0]->Draw();
-		break;
-	case Play:
+		sceneSprite_[1]->Draw();
 		break;
 	case Clear:
 		animationManager_.Draw(1);
+		sceneSprite_[1]->Draw();
 		break;
 	case GameOver:
 		animationManager_.Draw(2);
+		sceneSprite_[1]->Draw();
 		break;
 	}
 	// スプライト描画後処理

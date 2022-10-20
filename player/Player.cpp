@@ -29,7 +29,7 @@ void Player::Rotate()
 
 void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
-	model_ = Model::CreateFromOBJ("player");
+	model_ = Model::CreateFromOBJ("player",true);
 	input_ = Input::GetInstance();
 	viewProjection_ = viewProjection;
 	mapCamera_ = mapCamera;
