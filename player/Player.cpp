@@ -39,6 +39,7 @@ void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamer
 	stage_ = stage;
 	SetCollisionAttribute(CollisionAttribute::Player);
 	SetCollisionMask(CollisionMask::Player);
+	soundManager_ = SoundManager::GetInstance();
 }
 
 void Player::Update()
@@ -57,6 +58,7 @@ void Player::OnCollision()
 {
 	life_--;
 	isDead_ = true;
+	soundManager_->PlaySE(SoundManager::Hit);
 }
 
 void Player::InitPosAndCamera()

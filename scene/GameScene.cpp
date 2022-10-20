@@ -42,8 +42,8 @@ void GameScene::Initialize() {
 	uiDrawer_.Initialize(&player_);
 	background_.Initialize();
 	particleManager_ = ParticleManager::Create();
-	soundManager_.Initialize();
-	soundManager_.PlayBGM(SoundManager::Title);
+	soundManager_ = SoundManager::GetInstance();
+	soundManager_->PlayBGM(SoundManager::Title);
 }
 
 void GameScene::Update()
@@ -59,12 +59,14 @@ void GameScene::Update()
 		}
 		break;
 	case HowToPlay:
-		if (input_->PushKey(DIK_SPACE)) 
-		{
-			fadeManager_.ChangeScene(Play);
-		}
+		if (input_->PushKey(DIK_SPACE)) { fadeManager_.ChangeScene(Play); }
 		break;
 	case Play:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Title);
+			soundManager_->PlayBGM(SoundManager::Play);
+		}
 		if (!fadeManager_.IsFade()) { player_.Update(); }
 
 		if (input_->PushKey(DIK_SPACE) && !fadeManager_.IsFade())
@@ -115,6 +117,12 @@ void GameScene::Update()
 		particleManager_->Update();
 		break;
 	case Clear:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Play);
+			soundManager_->PlayBGM(SoundManager::Clear);
+		}
+
 		animationManager_.Update(1);
 		if (input_->PushKey(DIK_SPACE))
 		{
@@ -125,6 +133,12 @@ void GameScene::Update()
 		}
 		break;
 	case GameOver:
+		if (fadeManager_.IsChange())
+		{
+			soundManager_->StopBGM(SoundManager::Play);
+			soundManager_->PlayBGM(SoundManager::Clear);
+		}
+		
 		animationManager_.Update(2);
 		if (input_->PushKey(DIK_SPACE))
 		{
@@ -223,4 +237,16 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+
+void GameScene::Update_SceneChange()
+{
+}
+
+void GameScene::Update_Sound()
+{
+}
+
+void GameScene::Update_Play()
+{
 }

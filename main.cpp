@@ -48,6 +48,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// パーティクル静的初期化
 	ParticleManager::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
+
+	SoundManager* soundManager_ = SoundManager::GetInstance();
+	soundManager_->Initialize();
 #pragma endregion
 
 	// ゲームシーンの初期化

@@ -5,13 +5,22 @@
 class SoundManager
 {
 private:
-	Audio* audio_;
+	Audio* audio_ = nullptr;
 	std::vector<uint32_t>bgm_, se_;
+	bool isPlay_;
+
+	SoundManager() = default;
+	~SoundManager() = default;
+	SoundManager(const SoundManager&) = delete;
+	const SoundManager& operator=(const SoundManager&) = delete;
 public:
-	enum SoundIndex { Title, Play, Clear, GameOver };
+	enum BGM { Title, Play, Clear, GameOver };
+	enum SE { Hit };
+
+	static SoundManager* GetInstance();
 
 	void Initialize();
-	void PlayBGM(SoundIndex index);
-	void PlaySE(SoundIndex index);
-	void StopBGM(SoundIndex index);
+	void PlayBGM(BGM index);
+	void PlaySE(SE index);
+	void StopBGM(BGM index);
 };

@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "ViewProjection.h"
 #include "Sprite.h"
+#include "SoundManager/SoundManager.h"
 
 class Player :public Collider
 {
@@ -21,6 +22,7 @@ private:
 	ViewProjection* mapCamera_ = nullptr;
 	uint32_t* stage_;
 	bool isDead_ = false;
+	SoundManager* soundManager_ = nullptr;
 
 	void Move();
 	void Rotate();

@@ -43,6 +43,10 @@ public: // メンバ関数
 	void Draw();
 
 private: // メンバ変数
+	void Update_SceneChange();
+	void Update_Sound();
+	void Update_Play();
+
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	DebugText* debugText_ = nullptr;
@@ -52,7 +56,7 @@ private: // メンバ変数
 	ViewProjection mapCamera_;
 	uint32_t stage_ = 1;
 	CollisionManager collisionManager_;
-	Scene scene_ = Scene::Title;
+	Scene scene_ = Scene::HowToPlay;
 	Player player_;
 	WallManager wallManager_;
 	Fade fadeManager_;
@@ -60,5 +64,5 @@ private: // メンバ変数
 	UIDrawer uiDrawer_;
 	Skydome background_;
 	ParticleManager* particleManager_;
-	SoundManager soundManager_;
+	SoundManager* soundManager_;
 };
