@@ -43,7 +43,7 @@ void GameScene::Initialize() {
 	background_.Initialize();
 	particleManager_ = ParticleManager::Create();
 	soundManager_ = SoundManager::GetInstance();
-	soundManager_->PlayBGM(SoundManager::Title);
+	//soundManager_->PlayBGM(SoundManager::Title);
 }
 
 void GameScene::Update()
@@ -51,7 +51,7 @@ void GameScene::Update()
 	Update_Animation();
 	Update_SceneChange();
 	fadeManager_.Update();
-	Update_Sound();
+	//Update_Sound();
 	Update_Play();
 }
 
@@ -251,14 +251,8 @@ void GameScene::Update_Animation()
 {
 	switch (scene_)
 	{
-	case Title:
-		animationManager_.Update(0);
-		break;
-	case Clear:
-		animationManager_.Update(1);
-		break;
-	case GameOver:
-		animationManager_.Update(2);
-		break;
+	case Title:		animationManager_.Update(0); break;
+	case Clear:		animationManager_.Update(1); break;
+	case GameOver:	animationManager_.Update(2); break;
 	}
 }

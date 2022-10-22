@@ -58,7 +58,7 @@ void Player::OnCollision()
 {
 	life_--;
 	isDead_ = true;
-	soundManager_->PlaySE(SoundManager::Hit);
+	//soundManager_->PlaySE(SoundManager::Hit);
 }
 
 void Player::InitPosAndCamera()
