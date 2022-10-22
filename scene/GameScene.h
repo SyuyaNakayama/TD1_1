@@ -51,13 +51,13 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	DebugText* debugText_ = nullptr;
-	Model* model_;
 	std::vector<Sprite*> sceneSprite_;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
 	uint32_t stage_ = 1;
+	Vector2 goalTexturePos_{};
 	CollisionManager collisionManager_;
-	Scene scene_ = Scene::Title;
+	Scene scene_ = Scene::Play;
 	Player player_;
 	WallManager wallManager_;
 	Fade fadeManager_;

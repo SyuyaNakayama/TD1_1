@@ -13,7 +13,7 @@ private:
 
 public:
 	void Initialize();
-	void AllDraw(ViewProjection viewProjection);
+	void AllDraw(ViewProjection viewProjection,int goalRenderTarget);
 
 	std::vector<Wall> GetWalls() { return walls_; }
 	void SetStage(UINT32 stage);

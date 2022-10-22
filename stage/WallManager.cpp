@@ -7,10 +7,10 @@ void WallManager::Initialize()
 	SetStage(1);
 }
 
-void WallManager::AllDraw(ViewProjection viewProjection)
+void WallManager::AllDraw(ViewProjection viewProjection, int goalRenderTarget)
 {
 	for (size_t i = 0; i < walls_.size(); i++) { walls_[i].Draw(viewProjection); }
-	goal_->Draw(viewProjection);
+	goal_->Draw(viewProjection, goalRenderTarget);
 }
 
 void WallManager::SetStage(UINT32 stage)

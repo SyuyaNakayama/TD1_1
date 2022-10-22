@@ -1,7 +1,6 @@
 ﻿#include "GameScene.h"
 #include "TextureManager.h"
 #include <cassert>
-#include "MathUtility.h"
 
 using namespace std;
 
@@ -10,7 +9,6 @@ void GameScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	debugText_ = DebugText::GetInstance();
-	model_ = Model::Create();
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/spaceletter.png"), {}));
@@ -101,12 +99,12 @@ void GameScene::Draw() {
 		/// ここに3Dオブジェクトの描画処理を追加できる
 		/// </summary>
 		dxCommon_->SetViewport({}, { WinApp::kWindowWidth - 200, WinApp::kWindowHeight }); // ビューポート切り替え
-		wallManager_.AllDraw(viewProjection_);
+		wallManager_.AllDraw(viewProjection_, 0);
 		if (!player_.IsDead()) { player_.Draw(); }
 		background_.Draw(viewProjection_);
 
 		dxCommon_->SetViewport({ WinApp::kWindowWidth - 200, 0.0f }, { 200.0f, 200.0f }); // ビューポート切り替え
-		wallManager_.AllDraw(mapCamera_);
+		wallManager_.AllDraw(mapCamera_, 1);
 		background_.Draw(mapCamera_);
 		// 3Dオブジェクト描画後処理
 		Model::PostDraw();
@@ -243,7 +241,6 @@ void GameScene::Update_Play()
 	}
 
 	uiDrawer_.Update(wallManager_.GetGoal()->GetWorldPosition());
-
 	particleManager_->Update();
 }
 
