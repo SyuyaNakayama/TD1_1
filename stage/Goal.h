@@ -20,7 +20,6 @@ public:
 	void SetGoal(int stage);
 
 	void OnCollision() { isGoal = true; }
-	const Matrix4 GetWorldMatrix() { return worldTransform_.matWorld_; }
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
 	const Vector3 GetRadius() { return worldTransform_.scale_; }
 };
