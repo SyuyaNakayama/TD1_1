@@ -29,7 +29,7 @@ void Player::Rotate()
 
 void Player::Initialize(ViewProjection* viewProjection, ViewProjection* mapCamera, uint32_t* stage)
 {
-	model_ = Model::CreateFromOBJ("player",true);
+	model_ = Model::CreateFromOBJ("player", true);
 	input_ = Input::GetInstance();
 	viewProjection_ = viewProjection;
 	mapCamera_ = mapCamera;
@@ -56,9 +56,8 @@ void Player::Draw()
 
 void Player::OnCollision()
 {
-	life_--;
-	isDead_ = true;
-	//soundManager_->PlaySE(SoundManager::Hit);
+	life_--; isDead_ = true;
+	soundManager_->PlaySE(SoundManager::Hit);
 }
 
 void Player::InitPosAndCamera()

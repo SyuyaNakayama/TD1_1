@@ -41,7 +41,7 @@ void GameScene::Initialize() {
 	background_.Initialize();
 	particleManager_ = ParticleManager::Create();
 	soundManager_ = SoundManager::GetInstance();
-	//soundManager_->PlayBGM(SoundManager::Title);
+	soundManager_->PlayBGM(SoundManager::Title);
 }
 
 void GameScene::Update()
@@ -49,7 +49,7 @@ void GameScene::Update()
 	Update_Animation();
 	Update_SceneChange();
 	fadeManager_.Update();
-	//Update_Sound();
+	Update_Sound();
 	Update_Play();
 }
 
@@ -155,11 +155,13 @@ void GameScene::Update_SceneChange()
 		player_.LifeInit();
 		player_.InitPosAndCamera();
 		wallManager_.SetStage(stage_ = 1);
+		particleManager_->Clear();
 		break;
 	case GameOver:
 		fadeManager_.ChangeScene(Play);
 		player_.LifeInit();
 		player_.InitPosAndCamera();
+		particleManager_->Clear();
 		if (stage_ <= 4) { wallManager_.SetStage(stage_ = 1); }
 		else { wallManager_.SetStage(stage_ = 5); }
 		break;

@@ -57,7 +57,7 @@ private: // メンバ変数
 	uint32_t stage_ = 1;
 	Vector2 goalTexturePos_{};
 	CollisionManager collisionManager_;
-	Scene scene_ = Scene::Play;
+	Scene scene_ = Scene::Title;
 	Player player_;
 	WallManager wallManager_;
 	Fade fadeManager_;

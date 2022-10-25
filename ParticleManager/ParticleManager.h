@@ -206,7 +206,7 @@ public: // メンバ関数
 	// パーティクル追加
 	void Add(int life, float start_scale, float end_scale);
 
-	size_t GetParticleNum() { return std::distance(particles.begin(), particles.end()); }
+	void Clear() { particles.clear(); }
 
 private: // メンバ変数
 	ComPtr<ID3D12Resource> constBuff; // 定数バッファ
