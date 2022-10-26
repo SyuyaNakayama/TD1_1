@@ -7,7 +7,7 @@
 
 class Goal :public Collider
 {
-	WorldTransform worldTransform_,iconWorldTransform_;
+	WorldTransform worldTransform_, iconWorldTransform_;
 	Model* model_ = nullptr;
 	const float Y_POS = 5.0f;
 	const float Y_RAD = fabs(Y_POS) * 2.0f;
@@ -21,5 +21,5 @@ public:
 
 	void OnCollision() { isGoal = true; }
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }
-	const Vector3 GetRadius() { return worldTransform_.scale_; }
+	const Vector3 GetRadius() { return worldTransform_.scale_ + Vector3(3.0f, 0, 0); }
 };
