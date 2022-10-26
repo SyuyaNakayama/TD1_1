@@ -37,6 +37,11 @@ public:
 	float GetRotateY() { return worldTransform_.rotation_.y; }
 	bool IsDead() { return isDead_; }
 	uint32_t GetStage() { return *stage_; }
+	void ResetRotateY() 
+	{
+		worldTransform_.rotation_.y = 0; 
+		worldTransform_.Update();
+	}
 
 	void OnCollision();
 	const Vector3 GetWorldPosition() { return worldTransform_.translation_; }

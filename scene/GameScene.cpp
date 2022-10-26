@@ -156,12 +156,14 @@ void GameScene::Update_SceneChange()
 		player_.InitPosAndCamera();
 		wallManager_.SetStage(stage_ = 1);
 		particleManager_->Clear();
+		player_.ResetRotateY();
 		break;
 	case GameOver:
 		fadeManager_.ChangeScene(Play);
 		player_.LifeInit();
 		player_.InitPosAndCamera();
 		particleManager_->Clear();
+		player_.ResetRotateY();
 		if (stage_ <= 4) { wallManager_.SetStage(stage_ = 1); }
 		else { wallManager_.SetStage(stage_ = 5); }
 		break;
@@ -217,6 +219,7 @@ void GameScene::Update_Play()
 				wallManager_.SetStage(++stage_);
 				player_.LifeInit();
 				player_.InitPosAndCamera();
+				player_.ResetRotateY();
 			}
 		}
 		else
@@ -231,7 +234,11 @@ void GameScene::Update_Play()
 		{
 			// リトライ
 			fadeManager_.FadeScene();
-			if (fadeManager_.IsChange()) { player_.InitPosAndCamera(); }
+			if (fadeManager_.IsChange()) 
+			{ 
+				player_.InitPosAndCamera(); 
+				player_.ResetRotateY();
+			}
 		}
 		else
 		{
