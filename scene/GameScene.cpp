@@ -8,7 +8,6 @@ void GameScene::Initialize() {
 	// 機能の初期化
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
-	debugText_ = DebugText::GetInstance();
 	// スプライト生成
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/explanation.png"), {}));
 	sceneSprite_.push_back(Sprite::Create(TextureManager::Load("sceneSprite/spaceletter.png"), {}));
@@ -129,9 +128,6 @@ void GameScene::Draw() {
 	}
 	fadeManager_.Draw();
 
-	// デバッグテキストの描画
-	debugText_->DrawAll(commandList);
-	//
 	// スプライト描画後処理
 	Sprite::PostDraw();
 

@@ -13,12 +13,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 汎用機能
 	Input* input = nullptr;
 	Audio* audio = nullptr;
-	DebugText* debugText = nullptr;
 	GameScene* gameScene = nullptr;
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow("TD2_Game1");
+	win->CreateGameWindow("2147_Push_Timing");
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
@@ -38,10 +37,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// スプライト静的初期化
 	Sprite::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
-
-	// デバッグテキスト初期化
-	debugText = DebugText::GetInstance();
-	debugText->Initialize();
 
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();

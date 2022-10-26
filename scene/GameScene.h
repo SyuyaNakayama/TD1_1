@@ -3,7 +3,6 @@
 #include <vector>
 #include "Audio.h"
 #include "DirectXCommon.h"
-#include "DebugText.h"
 #include "DebugCamera.h"
 #include "Input.h"
 #include "Model.h"
@@ -50,7 +49,6 @@ private: // メンバ変数
 
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
-	DebugText* debugText_ = nullptr;
 	std::vector<Sprite*> sceneSprite_;
 	ViewProjection viewProjection_;
 	ViewProjection mapCamera_;
